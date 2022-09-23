@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'magazine.apps.MagazineConfig',
     'mptt',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [

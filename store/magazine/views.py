@@ -1,10 +1,14 @@
-from django.shortcuts import render
-from django.views import View
+from django.shortcuts import render, get_object_or_404
+from .models import *
 
 
-class MainView(View):
-    def get(self, request, *args, **kwargs):
-        return render(
-            request,
-            'magazine/index.html'
-        )
+def top_category(request):
+    template = 'magazine/index.html'
+    categories = Category.objects.filter(parent_id=None)
+    products = Product.objects.all()
+
+    context = {
+        'categories': categories,
+        'products': products,
+    }
+    return render(request, template, context)
