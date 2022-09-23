@@ -1,61 +1,98 @@
 {% load static %}
 
-<header class="header">
-    <div class="header_inner d-flex flex-row align-items-center justify-content-start">
-        <div class="logo"><a href="#">Wish</a></div>
-        <nav class="main_nav">
-            <ul>
-                <li><a href="#">home</a></li>
-                <li><a href="categories.html">clothes</a></li>
-                <li><a href="categories.html">accessories</a></li>
-                <li><a href="categories.html">lingerie</a></li>
-                <li><a href="contact.html">contact</a></li>
-            </ul>
+<header class="header_area">
+    <div class="classy-nav-container breakpoint-off d-flex align-items-center justify-content-between">
+        <!-- Classy Menu -->
+        <nav class="classy-navbar" id="essenceNav">
+            <!-- Logo -->
+            <a class="nav-brand" href="index.html"><img src="{% static 'img/core-img/logo.png' %}" alt=""></a>
+            <!-- Navbar Toggler -->
+            <div class="classy-navbar-toggler">
+                <span class="navbarToggler"><span></span><span></span><span></span></span>
+            </div>
+            <!-- Menu -->
+            <div class="classy-menu">
+                <!-- close btn -->
+                <div class="classycloseIcon">
+                    <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                </div>
+                <!-- Nav Start -->
+                <div class="classynav">
+                    <ul>
+                        <li><a href="#">Shop</a>
+                            <div class="megamenu">
+                                <ul class="single-mega cn-col-4">
+                                    <li class="title">Women's Collection</li>
+                                    <li><a href="shop.html">Dresses</a></li>
+                                    <li><a href="shop.html">Blouses &amp; Shirts</a></li>
+                                    <li><a href="shop.html">T-shirts</a></li>
+                                    <li><a href="shop.html">Rompers</a></li>
+                                    <li><a href="shop.html">Bras &amp; Panties</a></li>
+                                </ul>
+                                <ul class="single-mega cn-col-4">
+                                    <li class="title">Men's Collection</li>
+                                    <li><a href="shop.html">T-Shirts</a></li>
+                                    <li><a href="shop.html">Polo</a></li>
+                                    <li><a href="shop.html">Shirts</a></li>
+                                    <li><a href="shop.html">Jackets</a></li>
+                                    <li><a href="shop.html">Trench</a></li>
+                                </ul>
+                                <ul class="single-mega cn-col-4">
+                                    <li class="title">Kid's Collection</li>
+                                    <li><a href="shop.html">Dresses</a></li>
+                                    <li><a href="shop.html">Shirts</a></li>
+                                    <li><a href="shop.html">T-shirts</a></li>
+                                    <li><a href="shop.html">Jackets</a></li>
+                                    <li><a href="shop.html">Trench</a></li>
+                                </ul>
+                                <div class="single-mega cn-col-4">
+                                    <img src="{% static 'img/bg-img/bg-6.jpg' %}" alt="">
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="#">Pages</a>
+                            <ul class="dropdown">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="shop.html">Shop</a></li>
+                                <li><a href="single-product-details.html">Product Details</a></li>
+                                <li><a href="checkout.html">Checkout</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="single-blog.html">Single Blog</a></li>
+                                <li><a href="regular-page.html">Regular Page</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- Nav End -->
+            </div>
         </nav>
-        <div class="header_content ml-auto">
-            <div class="search header_search">
-                <form action="#">
-                    <input type="search" class="search_input" required="required">
-                    <button type="submit" id="search_button" class="search_button"><img
-                            src="{% static 'images/magnifying-glass.svg' %}" alt=""></button>
+
+        <!-- Header Meta Data -->
+        <div class="header-meta d-flex clearfix justify-content-end">
+            <!-- Search Area -->
+            <div class="search-area">
+                <form action="#" method="post">
+                    <input type="search" name="search" id="headerSearch" placeholder="Type for search">
+                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </form>
             </div>
-            <div class="shopping">
-                <!-- Cart -->
-                <a href="#">
-                    <div class="cart">
-                        <img src="{% static 'images/shopping-bag.svg' %}" alt="">
-                        <div class="cart_num_container">
-                            <div class="cart_num_inner">
-                                <div class="cart_num">1</div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <!-- Star -->
-                <a href="#">
-                    <div class="star">
-                        <img src="{% static 'images/star.svg' %}" alt="">
-                        <div class="star_num_container">
-                            <div class="star_num_inner">
-                                <div class="star_num">0</div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <!-- Avatar -->
-                <a href="#">
-                    <div class="avatar">
-                        <img src="{% static 'images/avatar.svg' %}" alt="">
-                    </div>
-                </a>
+            <!-- Favourite Area -->
+            <div class="favourite-area">
+                <a href="#"><img src="{% static 'img/core-img/heart.svg' %}" alt=""></a>
+            </div>
+            <!-- User Login Info -->
+            <div class="user-login-info">
+                <a href="#"><img src="{% static 'img/core-img/user.svg' %}" alt=""></a>
+            </div>
+            <!-- Cart Area -->
+            <div class="cart-area">
+                <a href="#" id="essenceCartBtn"><img src="{% static 'img/core-img/bag.svg' %}" alt="">
+                    <span>3</span></a>
             </div>
         </div>
 
-        <div class="burger_container d-flex flex-column align-items-center justify-content-around menu_mm">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
     </div>
 </header>
