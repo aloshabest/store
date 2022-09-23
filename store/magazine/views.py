@@ -8,7 +8,3 @@ class MainView(View):
             request,
             'magazine/index.html'
         )
-
-
-def index(request):
-    return render(request, 'magazine/index.html')
