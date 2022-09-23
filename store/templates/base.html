@@ -2,983 +2,549 @@
 
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<title>Wish</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="Wish shop project">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+		<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+		<link href="{% static 'plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+	</head>
+	<body>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>Cosso - Clean, Minimal Responsive HTML Template</title>
-    <link rel="stylesheet" href="{% static 'css/slick.css' %}">
-    <link rel="stylesheet" href="{% static 'css/slick-theme.css' %}">
-    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
-    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/png">
-    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900" rel="stylesheet">
-</head>
+		<div class="super_container">
 
-<body>
-    <!--push menu cart -->
-    <div class="pushmenu pushmenu-left cart-box-container">
-        <div class="cart-list">
-            <span class="close-left js-close">x</span>
-            <h3 class="cart-title">Your Cart</h3>
-            <ul class="list">
-                <li>
-                    <a href="#" title="" class="cart-product-image"><img src="{% static 'img/cart_1.jpg' %}" alt="Product"></a>
-                    <div class="text">
-                        <p class="product-name">Rose Gold Natural Band Watch</p>
-                        <p class="product-price">$295.00</p>
-                        <div class="quantity input-group">
-                            <button type="button" class="quantity-left-minus btn btn-number js-minus" data-type="minus" data-field="">
-                                <span class="minus-icon">-</span>
-                            </button>
-                            <input type="text" name="number" value="1" class="product_quantity_number js-number">
-                            <button type="button" class="quantity-right-plus btn btn-number js-plus" data-type="plus" data-field="">
-                                <span class="plus-icon">+</span>
-                            </button>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </li>
-                <li>
-                    <a href="#" title="" class="cart-product-image"><img src="{% static 'img/cart_1.jpg' %}" alt="Product"></a>
-                    <div class="text">
-                        <p class="product-name">Dot Drop Earrings</p>
-                        <p class="product-price">$295.00</p>
-                        <div class="quantity input-group">
-                            <button type="button" class="quantity-left-minus btn btn-number js-minus" data-type="minus" data-field="">
-                                <span class="minus-icon">-</span>
-                            </button>
-                            <input type="text" name="number" value="1" class="product_quantity_number js-number">
-                            <button type="button" class="quantity-right-plus btn btn-number js-plus" data-type="plus" data-field="">
-                                <span class="plus-icon">+</span>
-                            </button>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </li>
-                <li>
-                    <a href="#" title="" class="cart-product-image"><img src="{% static 'img/cart_1.jpg' %}" alt="Product"></a>
-                    <div class="text">
-                        <p class="product-name">Dot Drop Earrings</p>
-                        <p class="product-price">$295.00</p>
-                        <div class="quantity input-group">
-                            <button type="button" class="quantity-left-minus btn btn-number js-minus" data-type="minus" data-field="">
-                                <span class="minus-icon">-</span>
-                            </button>
-                            <input type="text" name="number" value="1" class="product_quantity_number js-number">
-                            <button type="button" class="quantity-right-plus btn btn-number js-plus" data-type="plus" data-field="">
-                                <span class="plus-icon">+</span>
-                            </button>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </li>
-            </ul>
-            <div class="cart-bottom">
-                <p class="total"><span>Subtotal</span> $560.00</p>
-                <div class="cart-button">
-                    <a class="checkout" href="#" title="">Check out</a>
-                    <a class="edit-cart" href="#" title="edit cart">Edit cart</a>
-                </div>
-                <a href="#" class="text">Our Shipping & Return Policy</a>
-            </div>
-            <!-- End cart bottom -->
-        </div>
-    </div>
-    <!-- End cart -->
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">SEARCH HERE</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group">
-                        <form method="get" class="searchform" action="/search" role="search">
-                            <input type="hidden" name="type" value="product">
-                            <input type="text" name="q" class="form-control control-search">
-                            <span class="input-group-btn">
-                              <button class="btn btn-default button_search" type="button"><i data-toggle="dropdown" class="fa fa-search"></i></button>
-                            </span>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--END  Modal content-->
-    <div class="wrappage">
-        <header id="header" class="header-v4 header-top-absolute home-clean">
-            <div class="sticky-header border-grey-bottom text-center hidden-xs hidden-sm">
-                <div class="text">
-                    <span class="u-line">Free shipping and returns</span> on all orders above $200
-                </div>
-            </div>
-            <div class="topbar">
-                <div class="container container-40">
-                    <div class="topbar-left">
-                        <div class="topbar-option">
-                            <div class="topbar-account">
-                                <a href="#"><i class="icon-user f-15"></i></a>
-                            </div>
-                            <div class="topbar-wishlist">
-                                <a href="#">
-                                <i class="icon-heart f-15"></i>
-                                <span class="count wishlist-count">0</span>
-                            </a>
-                            </div>
-                        </div>
-                        <!--end topbar-option-->
-                    </div>
-                    <!--end topbar-left-->
-                    <div class="topbar-right">
-                        <div class="topbar-option">
-                            <div class="topbar-search">
-                                <div class="search-popup dropdown" data-toggle="modal" data-target="#myModal">
-                                    <a href="#"><i class="icon-magnifier f-15"></i></a>
-                                </div>
-                            </div>
-                            <div class="topbar-cart">
-                                <a href="#" class="icon-cart">
-                                <i class="icon-basket f-15"></i>
-                                <span class="count cart-count">0</span>
-                            </a>
-                            </div>
-                        </div>
-                        <!--end topbar-option-->
-                    </div>
-                    <!--end topbar-right-->
-                    <!-- menu with logo-->
-                    <div class="topbar-center hidden-xs hidden-sm">
-                        <ul class="nav navbar-nav js-menubar">
-                            <li class="level1 active dropdown"><a href="#">Home</a>
-                                <span class="plus js-plus-icon"></span>
-                                <ul class="dropdown-menu menu-level-1">
-                                    <li class="level2"><a href="home-simple.html" title="Home Simple">Home Simple</a></li>
-                                    <li class="level2"><a href="home_clean.html" title="Home Clean">Home Clean</a></li>
-                                    <li class="level2"><a href="home_bestselling.html" title="Home Bestselling">Home Bestselling</a></li>
-                                    <li class="level2"><a href="home_instagrams.html" title="Home Instagram Shop">Home Instagram Shop</a></li>
-                                    <li class="level2"><a href="home_cat_metro.html" title="Home Cat Metro">Home Cat Metro</a></li>
-                                    <li class="level2"><a href="home_categories_slider_fullwidth.html" title="Home Categories Slider">Home Categories Slider</a></li>
-                                    <li class="level2"><a href="home_cate.html" title="Home Categories">Home Categories</a></li>
-                                    <li class="level2"><a href="home_parallax.html" title="Home Parallax">Home Parallax</a></li>
-                                    <li class="level2"><a href="home_fullslider.html" title="Home Fullslider">Home Fullslider</a></li>
-                                    <li class="level2"><a href="home_lookbook.html" title="Home Lookbook">Home Lookbook</a></li>
-                                    <li class="level2"><a href="home-minimal.html" title="Home Minimal">Home Minimal</a></li>
-                                </ul>
-                            </li>
-                            <li class="level1 dropdown hassub"><a href="#">Shop</a>
-                                <span class="plus js-plus-icon"></span>
-                                <div class="menu-level-1 dropdown-menu">
-                                    <ul class="level1">
-                                        <li class="level2 col-6">
-                                            <a href="#">Shop pages</a>
-                                            <ul class="menu-level-2 col-6">
-                                                <li class="level3"><a href="cart_page_emty.html" title="Cart Empty">Cart Empty</a></li>
-                                                <li class="level3"><a href="Cart_page_Prodcut.html" title="Shopping Cart">Shopping Cart</a></li>
-                                                <li class="level3"><a href="checkout.html" title="Checkout">Checkout</a></li>
-                                            </ul>
-                                            <div class="mega-product col-6">
-                                                <a href="#"><img src="{% static 'img/mega_1.jpg' %}" alt="" class="img-responsive"></a>
-                                            </div>
-                                            <div class="cleafix"></div>
-                                        </li>
-                                        <li class="level2 col-6">
-                                            <a href="#">Product demo</a>
-                                            <ul class="menu-level-2 col-6">
-                                                <li class="level3"><a href="single_product_simple.html" title="Product Simple">Product — Simple</a></li>
-                                                <li class="level3"><a href="single_product_variable.html" title="Product Variable">Product — Variable</a></li>
-                                                <li class="level3"><a href="single_product_downloadable.html" title="Product Downloadable">Product — Downloadable</a></li>
-                                                <li class="level3"><a href="single_Product_Grouped.html" title="Product Grouped">Product — Grouped</a></li>
-                                                <li class="level3"><a href="single_product_affiliate.html" title="Product Affiliate">Product — External / Affiliate</a></li>
-                                                <li class="level3"><a href="single_product_bundle.html" title="Product bundle">Product with bundle</a></li>
-                                                <li class="level3"><a href="single_product_360.html" title="Product 360">Product 360 Degree View</a></li>
-                                                <li class="level3"><a href="single_product_video.html" title="Product Featured Video">Product Video</a></li>
-                                                <li class="level3"><a href="single_product_fullwidth.html" title="Product Fullwidth">Product Fullwidth</a></li>
-                                                <li class="level3"><a href="single_product_sticky_detail.html" title="Product Sticky Detail">Product Sticky Detail</a></li>
-                                            </ul>
-                                            <div class="mega-product col-6">
-                                                <a href="#"><img src="{% static 'img/mega_2.jpg' %}" alt="" class="img-responsive"></a>
-                                            </div>
-                                            <div class="cleafix"></div>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </li>
-                            <li class="level1 active dropdown">
-                                <a href="#">Pages</a>
-                                <span class="plus js-plus-icon"></span>
-                                <ul class="dropdown-menu menu-level-1">
-                                    <li class="level2"><a href="login.html" title="Login">Login</a></li>
-                                    <li class="level2"><a href="register.html" title="Register">Register</a></li>
-                                </ul>
-                            </li>
-                            <li class="level1"><a href="" title="home-logo"><img src="{% static 'img/cosre.png' %}" alt="logo" class="img-reponsive"></a></li>
-                            <li class="level1 dropdown hassub">
-                                <a href="#">Features</a>
-                                <span class="plus js-plus-icon"></span>
-                                <div class="menu-level-1 dropdown-menu">
-                                    <ul class="level1">
-                                        <li class="level2 col-3">
-                                            <a href="#">Other Pages</a>
-                                            <ul class="menu-level-2">
-                                                <li class="level3"><a href="about_agency.html" title="About Agency">About Agency</a></li>
-                                                <li class="level3"><a href="about_shop.html" title="About Designer">About Designer</a></li>
-                                                <li class="level3"><a href="about-designer.html" title="About Shop">About Shop</a></li>
-                                                <li class="level3"><a href="commingsoon.html" title="Commingsoon">Commingsoon</a></li>
-                                                <li class="level3"><a href="contact_gmap.html" title="Contact_Map">Contact Map</a></li>
-                                                <li class="level3"><a href="contact_simple.html" title="Contact_Simple">Contact Simple</a></li>
-                                                <li class="level3"><a href="faq.html" title="FAQs">FAQs</a></li>
-                                                <li class="level3"><a href="our_teams.html" title="Our teams">Our teams</a></li>
-                                                <li class="level3"><a href="404.html" title="404 pages">404 page</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="level2 col-3">
-                                            <a href="#">Shop Style</a>
-                                            <ul class="menu-level-2">
-                                                <li class="level3"><a href="shop_flat.html" title="Shop Flat">Shop Flat</a></li>
-                                                <li class="level3"><a href="shopmodern-grid-custom.html" title="Shop Modern Grid Custom Bg">Shop Modern Grid Custom Bg</a></li>
-                                                <li class="level3"><a href="shopmodern-grid.html" title="Shop Modern Grid">Shop Modern Grid</a></li>
-                                                <li class="level3"><a href="shop_masonry.html" title="Shop Masonry">Shop Masonry</a></li>
-                                                <li class="level3"><a href="shop_sidebar_list.html" title="Shop Sidebar list">Shop Sidebar list</a></li>
-                                                <li class="level3"><a href="shop_standar_sidebar.html" title="Shop Standar Sidebar">Shop Standar Sidebar</a></li>
-                                                <li class="level3"><a href="shop_standar.html" title="Shop Standar">Shop Standar</a></li>
-                                                <li class="level3"><a href="shop_standard_simple_hero_section_dark.html" title="Shop Standard Simple Hero section dark">Shop Standard Simple Hero section dark</a></li>
-                                                <li class="level3"><a href="shop_standard_simple_hero_section_light.html" title="Shop Standard Simple Hero section light">Shop Standard Simple Hero section light</a></li>
-                                                <li class="level3"><a href="shop_standar.html" title="Shop Standard Simple Hero section">Shop Standard Simple Hero section</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="level2 col-3">
-                                            <a href="#">Lookbook</a>
-                                            <ul class="menu-level-2">
-                                                <li class="level3"><a href="lookbook_grid.html" title="Lookbook Grid">Lookbook Grid</a></li>
-                                                <li class="level3"><a href="lookbook_masonry.html" title="Lookbook Masonry">Lookbook Masonry</a></li>
-                                                <li class="level3"><a href="lookbook_popup.html" title="Lookbook Popup">Lookbook Popup</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </li>
-                            <li class="level1 active dropdown">
-                                <a href="#">Elements</a>
-                                <span class="plus js-plus-icon"></span>
-                                <ul class="dropdown-menu menu-level-1">
-                                    <li class="level2"><a href="quickview.html" title="Quick View">Quick View</a></li>
-                                    <li class="level2"><a href="#" title="Hover Product 4">Hover Product 4</a></li>
-                                    <li class="level2"><a href="#" title="Hover Product ">Hover Product </a></li>
-                                </ul>
-                            </li>
-                            <li class="level1 active dropdown">
-                                <a href="#">Blog</a>
-                                <span class="plus js-plus-icon"></span>
-                                <ul class="dropdown-menu menu-level-1">
-                                    <li class="level2"><a href="blog_classic.html" title="Blog Classic">Blog Classic</a></li>
-                                    <li class="level2"><a href="blog_grid.html" title="Blog Grid">Blog Grid</a></li>
-                                    <li class="level2"><a href="blog_listing.html" title="Blog Listing">Blog Listing</a></li>
-                                    <li class="level2"><a href="blog_masonry.html" title="Blog Masonry">Blog Masonry</a></li>
-                                    <li class="level2"><a href="singlepost_carouselproduct.html" title="Blog Single port Carousel Product">Blog Single port Carousel Product</a></li>
-                                    <li class="level2"><a href="single_port_instgram.html" title="Blog Single port Instgram">Blog Single port Instgram</a></li>
-                                    <li class="level2"><a href="singlepost_nosidebar.html" title="Blog Single port Nosidebar">Blog Single port Nosidebar</a></li>
-                                    <li class="level2"><a href="singlepost_sidebar.html" title="Blog Single port Sidebar">Blog Single port Sidebar</a></li>
-                                    <li class="level2"><a href="single_port_woomaper.html" title="Blog Single port Woomaper">Blog Single port Woomaper</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- end menu with logo-->
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-            <div class="header-top hidden-lg hidden-md">
-                <div class="container container-40">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="logo-mobile hidden-lg hidden-md">
-                                <a href="" title="home-logo"><img src="{% static 'img/cosre.png' %}" alt="logo" class="img-reponsive"></a>
-                            </div>
-                            <!--end logo-->
-                            <button type="button" class="navbar-toggle icon-mobile" data-toggle="collapse" data-target="#myNavbar">
-                                <span class="icon-menu"></span>
-                            </button>
-                            <nav class="navbar main-menu">
-                                <div class="collapse navbar-collapse" id="myNavbar">
-                                    <ul class="nav navbar-nav js-menubar">
-                                        <li class="level1 active dropdown"><a href="#">Home</a>
-                                            <span class="plus js-plus-icon"></span>
-                                            <ul class="dropdown-menu menu-level-1">
-                                                <li class="level2"><a href="home-simple.html" title="Home Simple">Home Simple</a></li>
-                                                <li class="level2"><a href="home_clean.html" title="Home Clean">Home Clean</a></li>
-                                                <li class="level2"><a href="home_bestselling.html" title="Home Bestselling">Home Bestselling</a></li>
-                                                <li class="level2"><a href="home_instagrams.html" title="Home Instagram Shop">Home Instagram Shop</a></li>
-                                                <li class="level2"><a href="home_cat_metro.html" title="Home Cat Metro">Home Cat Metro</a></li>
-                                                <li class="level2"><a href="home_categories_slider_fullwidth.html" title="Home Categories Slider">Home Categories Slider</a></li>
-                                                <li class="level2"><a href="home_cate.html" title="Home Categories">Home Categories</a></li>
-                                                <li class="level2"><a href="home_parallax.html" title="Home Parallax">Home Parallax</a></li>
-                                                <li class="level2"><a href="home_fullslider.html" title="Home Fullslider">Home Fullslider</a></li>
-                                                <li class="level2"><a href="home_lookbook.html" title="Home Lookbook">Home Lookbook</a></li>
-                                                <li class="level2"><a href="home-minimal.html" title="Home Minimal">Home Minimal</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="level1 dropdown hassub"><a href="#">Shop</a>
-                                            <span class="plus js-plus-icon"></span>
-                                            <div class="menu-level-1 dropdown-menu">
-                                                <ul class="level1">
-                                                    <li class="level2 col-6">
-                                                        <a href="#">Shop pages</a>
-                                                        <ul class="menu-level-2 col-6">
-                                                            <li class="level3"><a href="cart_page_emty.html" title="Cart Empty">Cart Empty</a></li>
-                                                            <li class="level3"><a href="Cart_page_Prodcut.html" title="Shopping Cart">Shopping Cart</a></li>
-                                                            <li class="level3"><a href="checkout.html" title="Checkout">Checkout</a></li>
-                                                        </ul>
-                                                        <div class="mega-product col-6">
-                                                            <a href="#"><img src="{% static 'img/mega_1.jpg' %}" alt="" class="img-responsive"></a>
-                                                        </div>
-                                                        <div class="cleafix"></div>
-                                                    </li>
-                                                    <li class="level2 col-6">
-                                                        <a href="#">Product demo</a>
-                                                        <ul class="menu-level-2 col-6">
-                                                            <li class="level3"><a href="single_product_simple.html" title="Product Simple">Product — Simple</a></li>
-                                                            <li class="level3"><a href="single_product_variable.html" title="Product Variable">Product — Variable</a></li>
-                                                            <li class="level3"><a href="single_product_downloadable.html" title="Product Downloadable">Product — Downloadable</a></li>
-                                                            <li class="level3"><a href="single_Product_Grouped.html" title="Product Grouped">Product — Grouped</a></li>
-                                                            <li class="level3"><a href="single_product_affiliate.html" title="Product Affiliate">Product — External / Affiliate</a></li>
-                                                            <li class="level3"><a href="single_product_bundle.html" title="Product bundle">Product with bundle</a></li>
-                                                            <li class="level3"><a href="single_product_360.html" title="Product 360">Product 360 Degree View</a></li>
-                                                            <li class="level3"><a href="single_product_video.html" title="Product Featured Video">Product Video</a></li>
-                                                            <li class="level3"><a href="single_product_fullwidth.html" title="Product Fullwidth">Product Fullwidth</a></li>
-                                                            <li class="level3"><a href="single_product_sticky_detail.html" title="Product Sticky Detail">Product Sticky Detail</a></li>
-                                                        </ul>
-                                                        <div class="mega-product col-6">
-                                                            <a href="#"><img src="{% static 'img/mega_2.jpg' %}" alt="" class="img-responsive"></a>
-                                                        </div>
-                                                        <div class="cleafix"></div>
-                                                    </li>
-                                                </ul>
-                                                <div class="clearfix"></div>
-                                            </div>
-                                        </li>
-                                        <li class="level1 active dropdown">
-                                            <a href="#">Pages</a>
-                                            <span class="plus js-plus-icon"></span>
-                                            <ul class="dropdown-menu menu-level-1">
-                                                <li class="level2"><a href="login.html" title="Login">Login</a></li>
-                                                <li class="level2"><a href="register.html" title="Register">Register</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="level1 dropdown hassub">
-                                            <a href="#">Features</a>
-                                            <span class="plus js-plus-icon"></span>
-                                            <div class="menu-level-1 dropdown-menu">
-                                                <ul class="level1">
-                                                    <li class="level2 col-3">
-                                                        <a href="#">Other Pages</a>
-                                                        <ul class="menu-level-2">
-                                                            <li class="level3"><a href="about_agency.html" title="About Agency">About Agency</a></li>
-                                                            <li class="level3"><a href="about_shop.html" title="About Designer">About Designer</a></li>
-                                                            <li class="level3"><a href="about-designer.html" title="About Shop">About Shop</a></li>
-                                                            <li class="level3"><a href="commingsoon.html" title="Commingsoon">Commingsoon</a></li>
-                                                            <li class="level3"><a href="contact_gmap.html" title="Contact_Map">Contact Map</a></li>
-                                                            <li class="level3"><a href="contact_simple.html" title="Contact_Simple">Contact Simple</a></li>
-                                                            <li class="level3"><a href="faq.html" title="FAQs">FAQs</a></li>
-                                                            <li class="level3"><a href="our_teams.html" title="Our teams">Our teams</a></li>
-                                                            <li class="level3"><a href="404.html" title="404 pages">404 page</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="level2 col-3">
-                                                        <a href="#">Shop Style</a>
-                                                        <ul class="menu-level-2">
-                                                            <li class="level3"><a href="shop_flat.html" title="Shop Flat">Shop Flat</a></li>
-                                                            <li class="level3"><a href="shopmodern-grid-custom.html" title="Shop Modern Grid Custom Bg">Shop Modern Grid Custom Bg</a></li>
-                                                            <li class="level3"><a href="shopmodern-grid.html" title="Shop Modern Grid">Shop Modern Grid</a></li>
-                                                            <li class="level3"><a href="shop_masonry.html" title="Shop Masonry">Shop Masonry</a></li>
-                                                            <li class="level3"><a href="shop_sidebar_list.html" title="Shop Sidebar list">Shop Sidebar list</a></li>
-                                                            <li class="level3"><a href="shop_standar_sidebar.html" title="Shop Standar Sidebar">Shop Standar Sidebar</a></li>
-                                                            <li class="level3"><a href="shop_standar.html" title="Shop Standar">Shop Standar</a></li>
-                                                            <li class="level3"><a href="shop_standard_simple_hero_section_dark.html" title="Shop Standard Simple Hero section dark">Shop Standard Simple Hero section dark</a></li>
-                                                            <li class="level3"><a href="shop_standard_simple_hero_section_light.html" title="Shop Standard Simple Hero section light">Shop Standard Simple Hero section light</a></li>
-                                                            <li class="level3"><a href="shop_standar.html" title="Shop Standard Simple Hero section">Shop Standard Simple Hero section</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="level2 col-3">
-                                                        <a href="#">Lookbook</a>
-                                                        <ul class="menu-level-2">
-                                                            <li class="level3"><a href="lookbook_grid.html" title="Lookbook Grid">Lookbook Grid</a></li>
-                                                            <li class="level3"><a href="lookbook_masonry.html" title="Lookbook Masonry">Lookbook Masonry</a></li>
-                                                            <li class="level3"><a href="lookbook_popup.html" title="Lookbook Popup">Lookbook Popup</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                                <div class="clearfix"></div>
-                                            </div>
-                                        </li>
-                                        <li class="level1 active dropdown">
-                                            <a href="#">Elements</a>
-                                            <span class="plus js-plus-icon"></span>
-                                            <ul class="dropdown-menu menu-level-1">
-                                                <li class="level2"><a href="quickview.html" title="Quick View">Quick View</a></li>
-                                                <li class="level2"><a href="#" title="Hover Product 4">Hover Product 4</a></li>
-                                                <li class="level2"><a href="#" title="Hover Product ">Hover Product </a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="level1 active dropdown">
-                                            <a href="#">Blog</a>
-                                            <span class="plus js-plus-icon"></span>
-                                            <ul class="dropdown-menu menu-level-1">
-                                                <li class="level2"><a href="blog_classic.html" title="Blog Classic">Blog Classic</a></li>
-                                                <li class="level2"><a href="blog_grid.html" title="Blog Grid">Blog Grid</a></li>
-                                                <li class="level2"><a href="blog_listing.html" title="Blog Listing">Blog Listing</a></li>
-                                                <li class="level2"><a href="blog_masonry.html" title="Blog Masonry">Blog Masonry</a></li>
-                                                <li class="level2"><a href="singlepost_carouselproduct.html" title="Blog Single port Carousel Product">Blog Single port Carousel Product</a></li>
-                                                <li class="level2"><a href="single_port_instgram.html" title="Blog Single port Instgram">Blog Single port Instgram</a></li>
-                                                <li class="level2"><a href="singlepost_nosidebar.html" title="Blog Single port Nosidebar">Blog Single port Nosidebar</a></li>
-                                                <li class="level2"><a href="singlepost_sidebar.html" title="Blog Single port Sidebar">Blog Single port Sidebar</a></li>
-                                                <li class="level2"><a href="single_port_woomaper.html" title="Blog Single port Woomaper">Blog Single port Woomaper</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <!-- /header -->
-        <!--slide-->
-        <div class="wrapper-slider homeclean-slider js-homeclean-slider">
-            <div class="slider-img ">
-                <img src="{% static 'img/homeclean_1.jpg' %}" alt="" class="img-responsive">
-                <div class="container box-center">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="slider-content text-center">
-                                <h1>Floral</h1>
-                                <a href="" class="btn-shop">Shop collection</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="slider-img ">
-                <img src="{% static 'img/homeclean_2.jpg' %}" alt="" class="img-responsive">
-            </div>
-            <div class="slider-img ">
-                <img src="{% static 'img/homeclean_3.jpg' %}" alt="" class="img-responsive">
-            </div>
-        </div>
-        <!--endslide-->
-        <!--banner-->
-        <div class="container container-40">
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6">
-                    <div class="banner-img">
-                        <a class="" href="#"><img src="{% static 'img/banner_1.jpg' %}" alt="banner" class="img-reponsive"></a>
-                        <div class="banner-content">
-                            <h3 class="banner-title">Summer Collection</h3>
-                            <p>Free Shiping On All Oders</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-6">
-                    <div class="banner-img">
-                        <a class="" href="#"><img src="{% static 'img/banner_2.jpg' %}" alt="banner" class="img-reponsive"></a>
-                        <div class="banner-content">
-                            <h3 class="banner-title">Man Collection</h3>
-                            <p>Free Shiping On All Oders</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--en-banner-->
-        <!--wrapper product-->
-        <div class="wrapper-product space-margin-top-85 ">
-            <div class="container container-40">
-                <h3 class="heading-v2 text-center">Featured Products</h3>
-                <div class="row">
-                    <div class="col-md-15 col-sm-3 col-xs-6 product-item">
-                        <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static 'img/products/shortshirt.jpg' %}" alt="photo" class="img-reponsive"></a>
-                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-                            <a href="#" class="btn-quickview">QUICK VIEW</a>
-                        </div>
-                        <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">The Turtleneck</a></h3>
-                            <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
-                                <div class="product-after-button">
-                                    <a href="#" class="addcart">ADD TO CART</a>
-                                </div>
-                            </div>
-                            <div class="rating-star">
-                                <span class="star star-5"></span>
-                                <span class="star star-4"></span>
-                                <span class="star star-3"></span>
-                                <span class="star star-2"></span>
-                                <span class="star star-1"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-15 col-sm-3 col-xs-6 product-item">
-                        <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static 'img/products/hat_2.jpg' %}" alt="photo" class="img-reponsive"></a>
-                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-                            <a href="#" class="btn-quickview">QUICK VIEW</a>
-                        </div>
-                        <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">Rose Gold/Natural Band Watch</a></h3>
-                            <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
-                                <div class="product-after-button">
-                                    <a href="#" class="addcart">ADD TO CART</a>
-                                </div>
-                            </div>
-                            <div class="rating-star">
-                                <span class="star star-5"></span>
-                                <span class="star star-4"></span>
-                                <span class="star star-3"></span>
-                                <span class="star star-2"></span>
-                                <span class="star star-1"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-15 col-sm-3 col-xs-6 product-item">
-                        <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static 'img/products/tshirt.jpg' %}" alt="photo" class="img-reponsive"></a>
-                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-                            <a href="#" class="btn-quickview">QUICK VIEW</a>
-                        </div>
-                        <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">Sk8 Mid Moc CA Oyster Grey</a></h3>
-                            <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
-                                <div class="product-after-button">
-                                    <a href="#" class="addcart">ADD TO CART</a>
-                                </div>
-                            </div>
-                            <div class="rating-star">
-                                <span class="star star-5"></span>
-                                <span class="star star-4"></span>
-                                <span class="star star-3"></span>
-                                <span class="star star-2"></span>
-                                <span class="star star-1"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-15 col-sm-3 col-xs-6 product-item">
-                        <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static 'img/products/sneaker.jpg' %}" alt="photo" class="img-reponsive"></a>
-                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-                            <a href="#" class="btn-quickview">QUICK VIEW</a>
-                        </div>
-                        <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">Dot Drop Earrings</a></h3>
-                            <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
-                                <div class="product-after-button">
-                                    <a href="#" class="addcart">ADD TO CART</a>
-                                </div>
-                            </div>
-                            <div class="rating-star">
-                                <span class="star star-5"></span>
-                                <span class="star star-4"></span>
-                                <span class="star star-3"></span>
-                                <span class="star star-2"></span>
-                                <span class="star star-1"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-15 col-sm-3 col-xs-6 product-item">
-                        <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static 'img/products/longcoat_g.jpg' %}" alt="photo" class="img-reponsive"></a>
-                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-                            <a href="#" class="btn-quickview">QUICK VIEW</a>
-                        </div>
-                        <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">Bells of Ireland Jumpsuit</a></h3>
-                            <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
-                                <div class="product-after-button">
-                                    <a href="#" class="addcart">ADD TO CART</a>
-                                </div>
-                            </div>
-                            <div class="rating-star">
-                                <span class="star star-5"></span>
-                                <span class="star star-4"></span>
-                                <span class="star star-3"></span>
-                                <span class="star star-2"></span>
-                                <span class="star star-1"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-15 col-sm-3 col-xs-6 product-item">
-                        <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static 'img/products/highheels.jpg' %}" alt="photo" class="img-reponsive"></a>
-                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-                            <a href="#" class="btn-quickview">QUICK VIEW</a>
-                        </div>
-                        <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">The Turtleneck</a></h3>
-                            <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
-                                <div class="product-after-button">
-                                    <a href="#" class="addcart">ADD TO CART</a>
-                                </div>
-                            </div>
-                            <div class="rating-star">
-                                <span class="star star-5"></span>
-                                <span class="star star-4"></span>
-                                <span class="star star-3"></span>
-                                <span class="star star-2"></span>
-                                <span class="star star-1"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-15 col-sm-3 col-xs-6 product-item">
-                        <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static 'img/products/hoodie.jpg' %}" alt="photo" class="img-reponsive"></a>
-                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-                            <a href="#" class="btn-quickview">QUICK VIEW</a>
-                        </div>
-                        <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">Rose Gold/Natural Band Watch</a></h3>
-                            <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
-                                <div class="product-after-button">
-                                    <a href="#" class="addcart">ADD TO CART</a>
-                                </div>
-                            </div>
-                            <div class="rating-star">
-                                <span class="star star-5"></span>
-                                <span class="star star-4"></span>
-                                <span class="star star-3"></span>
-                                <span class="star star-2"></span>
-                                <span class="star star-1"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-15 col-sm-3 col-xs-6 product-item">
-                        <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static 'img/products/bag_1.jpg' %}" alt="photo" class="img-reponsive"></a>
-                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-                            <a href="#" class="btn-quickview">QUICK VIEW</a>
-                        </div>
-                        <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">Sk8 Mid Moc CA Oyster Grey</a></h3>
-                            <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
-                                <div class="product-after-button">
-                                    <a href="#" class="addcart">ADD TO CART</a>
-                                </div>
-                            </div>
-                            <div class="rating-star">
-                                <span class="star star-5"></span>
-                                <span class="star star-4"></span>
-                                <span class="star star-3"></span>
-                                <span class="star star-2"></span>
-                                <span class="star star-1"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-15 col-sm-3 col-xs-6 product-item">
-                        <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static 'img/products/long.jpg' %}" alt="photo" class="img-reponsive"></a>
-                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-                            <a href="#" class="btn-quickview">QUICK VIEW</a>
-                        </div>
-                        <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">Dot Drop Earrings</a></h3>
-                            <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
-                                <div class="product-after-button">
-                                    <a href="#" class="addcart">ADD TO CART</a>
-                                </div>
-                            </div>
-                            <div class="rating-star">
-                                <span class="star star-5"></span>
-                                <span class="star star-4"></span>
-                                <span class="star star-3"></span>
-                                <span class="star star-2"></span>
-                                <span class="star star-1"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-15 col-sm-3 col-xs-6 product-item">
-                        <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static 'img/products/sunglasses_1.jpg' %}" alt="photo" class="img-reponsive"></a>
-                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-                            <a href="#" class="btn-quickview">QUICK VIEW</a>
-                        </div>
-                        <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">Bells of Ireland Jumpsuit</a></h3>
-                            <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
-                                <div class="product-after-button">
-                                    <a href="#" class="addcart">ADD TO CART</a>
-                                </div>
-                            </div>
-                            <div class="rating-star">
-                                <span class="star star-5"></span>
-                                <span class="star star-4"></span>
-                                <span class="star star-3"></span>
-                                <span class="star star-2"></span>
-                                <span class="star star-1"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-15 col-sm-3 col-xs-6 product-item">
-                        <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static 'img/products/mixhoodie.jpg' %}" alt="photo" class="img-reponsive"></a>
-                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-                            <a href="#" class="btn-quickview">QUICK VIEW</a>
-                        </div>
-                        <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">The Turtleneck</a></h3>
-                            <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
-                                <div class="product-after-button">
-                                    <a href="#" class="addcart">ADD TO CART</a>
-                                </div>
-                            </div>
-                            <div class="rating-star">
-                                <span class="star star-5"></span>
-                                <span class="star star-4"></span>
-                                <span class="star star-3"></span>
-                                <span class="star star-2"></span>
-                                <span class="star star-1"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-15 col-sm-3 col-xs-6 product-item">
-                        <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static 'img/products/bag_2.jpg' %}" alt="photo" class="img-reponsive"></a>
-                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-                            <a href="#" class="btn-quickview">QUICK VIEW</a>
-                        </div>
-                        <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">Rose Gold/Natural Band Watch</a></h3>
-                            <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
-                                <div class="product-after-button">
-                                    <a href="#" class="addcart">ADD TO CART</a>
-                                </div>
-                            </div>
-                            <div class="rating-star">
-                                <span class="star star-5"></span>
-                                <span class="star star-4"></span>
-                                <span class="star star-3"></span>
-                                <span class="star star-2"></span>
-                                <span class="star star-1"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-15 col-sm-3 col-xs-6 product-item">
-                        <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static 'img/products/hoodie_w.jpg' %}" alt="photo" class="img-reponsive"></a>
-                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-                            <a href="#" class="btn-quickview">QUICK VIEW</a>
-                        </div>
-                        <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">Sk8 Mid Moc CA Oyster Grey</a></h3>
-                            <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
-                                <div class="product-after-button">
-                                    <a href="#" class="addcart">ADD TO CART</a>
-                                </div>
-                            </div>
-                            <div class="rating-star">
-                                <span class="star star-5"></span>
-                                <span class="star star-4"></span>
-                                <span class="star star-3"></span>
-                                <span class="star star-2"></span>
-                                <span class="star star-1"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-15 col-sm-3 col-xs-6 product-item">
-                        <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static 'img/products/sunglasses_2.jpg' %}" alt="photo" class="img-reponsive"></a>
-                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-                            <a href="#" class="btn-quickview">QUICK VIEW</a>
-                        </div>
-                        <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">Dot Drop Earrings</a></h3>
-                            <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
-                                <div class="product-after-button">
-                                    <a href="#" class="addcart">ADD TO CART</a>
-                                </div>
-                            </div>
-                            <div class="rating-star">
-                                <span class="star star-5"></span>
-                                <span class="star star-4"></span>
-                                <span class="star star-3"></span>
-                                <span class="star star-2"></span>
-                                <span class="star star-1"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-15 col-sm-3 col-xs-6 product-item">
-                        <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static 'img/products/sweater_w.jpg' %}" alt="photo" class="img-reponsive"></a>
-                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-                            <a href="#" class="btn-quickview">QUICK VIEW</a>
-                        </div>
-                        <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">Bells of Ireland Jumpsuit</a></h3>
-                            <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
-                                <div class="product-after-button">
-                                    <a href="#" class="addcart">ADD TO CART</a>
-                                </div>
-                            </div>
-                            <div class="rating-star">
-                                <span class="star star-5"></span>
-                                <span class="star star-4"></span>
-                                <span class="star star-3"></span>
-                                <span class="star star-2"></span>
-                                <span class="star star-1"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="button-v v7 text-center">
-                    <a class="btn-loadmore"><i class="icon-refresh f-15"></i>Load more</a>
-                </div>
-            </div>
-        </div>
-        <!--end wrapper product-->
-        <!--newsletter-->
-        <div class="container container-40">
-            <div class="newsletter">
-                <div class="newsletter-content text-center">
-                    <h3 class="newsletter-title">Sign up and receive <em>10% off </em>   your first order</h3>
-                    <form action="#" method="POST" class="form-inline">
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Enter your email adress">
-                            <button type="submit" class="btn-newsletter"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!--end newsletter-->
-        <!--blog-->
-        <div class="blog">
-            <div class="container">
-                <h3 class="heading text-center">On The Blog</h3>
-                <div class="owl-carousel owl-theme js-owl-blog">
-                    <div class="blog-post-item">
-                        <div class="blog-post-img">
-                            <a class="hover-images" href="#"><img src="{% static 'img/blog_1.jpg' %}" class="img-reponsive" alt="blog-img"></a>
-                        </div>
-                        <div class="blog-post-info">
-                            <div class="post-date">February 22, 2017</div>
-                            <h3 class="post-name"><a href="#">Here’s everything you need to know about the Brit Awards 2017</a></h3>
-                        </div>
-                    </div>
-                    <div class="blog-post-item">
-                        <div class="blog-post-img">
-                            <a class="hover-images" href="#"><img src="{% static 'img/blog_2.jpg' %}" class="img-reponsive" alt="blog-img"></a>
-                        </div>
-                        <div class="blog-post-info">
-                            <div class="post-date">February 22, 2017</div>
-                            <h3 class="post-name"><a href="#">Here’s everything you need to know about the Brit Awards 2017</a></h3>
-                        </div>
-                    </div>
-                    <div class="blog-post-item">
-                        <div class="blog-post-img">
-                            <a class="hover-images" href="#"><img src="{% static 'img/blog_3.jpg' %}" class="img-reponsive" alt="blog-img"></a>
-                        </div>
-                        <div class="blog-post-info">
-                            <div class="post-date">February 22, 2017</div>
-                            <h3 class="post-name"><a href="#">Here’s everything you need to know about the Brit Awards 2017</a></h3>
-                        </div>
-                    </div>
-                    <div class="blog-post-item">
-                        <div class="blog-post-img">
-                            <a class="hover-images" href="#"><img src="{% static 'img/blog_3.jpg' %}" class="img-reponsive" alt="blog-img"></a>
-                        </div>
-                        <div class="blog-post-info">
-                            <div class="post-date">February 22, 2017</div>
-                            <h3 class="post-name"><a href="#">Here’s everything you need to know about the Brit Awards 2017</a></h3>
-                        </div>
-                    </div>
-                    <div class="blog-post-item">
-                        <div class="blog-post-img">
-                            <a class="hover-images" href="#"><img src="{% static 'img/blog_3.jpg' %}" class="img-reponsive" alt="blog-img"></a>
-                        </div>
-                        <div class="blog-post-info">
-                            <div class="post-date">February 22, 2017</div>
-                            <h3 class="post-name"><a href="#">Here’s everything you need to know about the Brit Awards 2017</a></h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--end blog-->
-        <!-- footer -->
-        <footer>
-            <div class="container container-40">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-                        <div class="menu-footer">
-                            <ul>
-                                <li><a href="#">Shipping</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-                        <div class="newletter-form">
-                            <h3 class="footer-title text-center">Newsletter</h3>
-                            <form action="#">
-                                <input type="text" name="s" placeholder="Email Adress..." class="form-control">
-                                <button type="submit" class="btn btn-submit">
-                                    <i class="fa fa-angle-right"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
-                        <div class="social">
-                            <a href="#" title="twitter">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                            <a href="#" title="facebook">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                            <a href="#" title="google plus">
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                            <a href="#" title="Pinterest">
-                            <i class="fa fa-pinterest-p"></i>
-                        </a>
-                            <a href="#" title="rss">
-                            <i class="fa fa-rss"></i>
-                        </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
-    <!--end footer-->
-    <a href="#" class="scroll_top">SCROLL TO TOP<span></span></a>
-    <script src="{% static 'js/jquery.js' %}"></script>
-    <script src="{% static 'js/bootstrap.js' %}"></script>
-    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'js/slick.min.js' %}"></script>
-    <script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
-    <script src="{% static 'vjs/main.js' %}"></script>
-</body>
+			<!-- Header -->
 
+			<header class="header">
+				<div class="header_inner d-flex flex-row align-items-center justify-content-start">
+					<div class="logo"><a href="#">Wish</a></div>
+					<nav class="main_nav">
+						<ul>
+							<li><a href="#">home</a></li>
+							<li><a href="categories.html">clothes</a></li>
+							<li><a href="categories.html">accessories</a></li>
+							<li><a href="categories.html">lingerie</a></li>
+							<li><a href="contact.html">contact</a></li>
+						</ul>
+					</nav>
+					<div class="header_content ml-auto">
+						<div class="search header_search">
+							<form action="#">
+								<input type="search" class="search_input" required="required">
+								<button type="submit" id="search_button" class="search_button"><img src="{% static 'images/magnifying-glass.svg' %}" alt=""></button>
+							</form>
+						</div>
+						<div class="shopping">
+							<!-- Cart -->
+							<a href="#">
+								<div class="cart">
+									<img src="{% static 'images/shopping-bag.svg' %}" alt="">
+									<div class="cart_num_container">
+										<div class="cart_num_inner">
+											<div class="cart_num">1</div>
+										</div>
+									</div>
+								</div>
+							</a>
+							<!-- Star -->
+							<a href="#">
+								<div class="star">
+									<img src="{% static 'images/star.svg' %}" alt="">
+									<div class="star_num_container">
+										<div class="star_num_inner">
+											<div class="star_num">0</div>
+										</div>
+									</div>
+								</div>
+							</a>
+							<!-- Avatar -->
+							<a href="#">
+								<div class="avatar">
+									<img src="{% static 'images/avatar.svg' %}" alt="">
+								</div>
+							</a>
+						</div>
+					</div>
+
+					<div class="burger_container d-flex flex-column align-items-center justify-content-around menu_mm"><div></div><div></div><div></div></div>
+				</div>
+			</header>
+
+			<!-- Menu -->
+
+			<div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
+				<div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>
+				<div class="logo menu_mm"><a href="#">Wish</a></div>
+				<div class="search">
+					<form action="#">
+						<input type="search" class="search_input menu_mm" required="required">
+						<button type="submit" id="search_button_menu" class="search_button menu_mm"><img class="menu_mm" src="{% static 'images/magnifying-glass.svg' %}" alt=""></button>
+					</form>
+				</div>
+				<nav class="menu_nav">
+					<ul class="menu_mm">
+						<li class="menu_mm"><a href="#">home</a></li>
+						<li class="menu_mm"><a href="#">clothes</a></li>
+						<li class="menu_mm"><a href="#">accessories</a></li>
+						<li class="menu_mm"><a href="#">lingerie</a></li>
+						<li class="menu_mm"><a href="#">contact</a></li>
+					</ul>
+				</nav>
+			</div>
+
+			<!-- Home -->
+
+			<div class="home">
+
+				<!-- Home Slider -->
+
+				<div class="home_slider_container">
+					<div class="owl-carousel owl-theme home_slider">
+
+						<!-- Home Slider Item -->
+						<div class="owl-item">
+							<div class="home_slider_background" style="background-image:url({% static 'images/home_slider_1.jpg' %})"></div>
+							<div class="home_slider_content">
+								<div class="home_slider_content_inner">
+									<div class="home_slider_subtitle">Promo Prices</div>
+									<div class="home_slider_title">New Collection</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Home Slider Item -->
+						<div class="owl-item">
+							<div class="home_slider_background" style="background-image:url({% static 'images/home_slider_1.jpg' %})"></div>
+							<div class="home_slider_content">
+								<div class="home_slider_content_inner">
+									<div class="home_slider_subtitle">Promo Prices</div>
+									<div class="home_slider_title">New Collection</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Home Slider Item -->
+						<div class="owl-item">
+							<div class="home_slider_background" style="background-image:url({% static 'images/home_slider_1.jpg' %})"></div>
+							<div class="home_slider_content">
+								<div class="home_slider_content_inner">
+									<div class="home_slider_subtitle">Promo Prices</div>
+									<div class="home_slider_title">New Collection</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<!-- Home Slider Nav -->
+
+					<div class="home_slider_next d-flex flex-column align-items-center justify-content-center"><img src="images/arrow_r.png" alt=""></div>
+
+					<!-- Home Slider Dots -->
+
+					<div class="home_slider_dots_container">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+									<div class="home_slider_dots">
+										<ul id="home_slider_custom_dots" class="home_slider_custom_dots">
+											<li class="home_slider_custom_dot active">01.<div></div></li>
+											<li class="home_slider_custom_dot">02.<div></div></li>
+											<li class="home_slider_custom_dot">03.<div></div></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Promo -->
+
+			<div class="promo">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="section_title_container text-center">
+								<div class="section_subtitle">only the best</div>
+								<div class="section_title">promo prices</div>
+							</div>
+						</div>
+					</div>
+					<div class="row promo_container">
+
+						<!-- Promo Item -->
+						<div class="col-lg-4 promo_col">
+							<div class="promo_item">
+								<div class="promo_image">
+									<img src="{% static 'images/promo_1.jpg' %}" alt="">
+									<div class="promo_content promo_content_1">
+										<div class="promo_title">-30% off</div>
+										<div class="promo_subtitle">on all bags</div>
+									</div>
+								</div>
+								<div class="promo_link"><a href="#">Shop Now</a></div>
+							</div>
+						</div>
+
+						<!-- Promo Item -->
+						<div class="col-lg-4 promo_col">
+							<div class="promo_item">
+								<div class="promo_image">
+									<img src="{% static 'images/promo_2.jpg' %}" alt="">
+									<div class="promo_content promo_content_2">
+										<div class="promo_title">-30% off</div>
+										<div class="promo_subtitle">coats & jackets</div>
+									</div>
+								</div>
+								<div class="promo_link"><a href="#">Shop Now</a></div>
+							</div>
+						</div>
+
+						<!-- Promo Item -->
+						<div class="col-lg-4 promo_col">
+							<div class="promo_item">
+								<div class="promo_image">
+									<img src="{% static 'images/promo_3.jpg' %}" alt="">
+									<div class="promo_content promo_content_3">
+										<div class="promo_title">-25% off</div>
+										<div class="promo_subtitle">on Sandals</div>
+									</div>
+								</div>
+								<div class="promo_link"><a href="#">Shop Now</a></div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<!-- New Arrivals -->
+
+			<div class="arrivals">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="section_title_container text-center">
+								<div class="section_subtitle">only the best</div>
+								<div class="section_title">new arrivals</div>
+							</div>
+						</div>
+					</div>
+					<div class="row products_container">
+
+						<!-- Product -->
+						<div class="col-lg-4 product_col">
+							<div class="product">
+								<div class="product_image">
+									<img src="{% static 'images/product_1.jpg' %}" alt="">
+								</div>
+								<div class="rating rating_4">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+								</div>
+								<div class="product_content clearfix">
+									<div class="product_info">
+										<div class="product_name"><a href="product.html">Woman's Long Dress</a></div>
+										<div class="product_price">$45.00</div>
+									</div>
+									<div class="product_options">
+										<div class="product_buy product_option"><img src="{% static 'images/shopping-bag-white.svg' %}" alt=""></div>
+										<div class="product_fav product_option">+</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Product -->
+						<div class="col-lg-4 product_col">
+							<div class="product">
+								<div class="product_image">
+									<img src="{% static 'images/product_2.jpg' %}" alt="">
+								</div>
+								<div class="rating rating_4">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+								</div>
+								<div class="product_content clearfix">
+									<div class="product_info">
+										<div class="product_name"><a href="product.html">2 Piece Swimsuit</a></div>
+										<div class="product_price">$35.00</div>
+									</div>
+									<div class="product_options">
+										<div class="product_buy product_option"><img src="{% static 'images/shopping-bag-white.svg' %}" alt=""></div>
+										<div class="product_fav product_option">+</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Product -->
+						<div class="col-lg-4 product_col">
+							<div class="product">
+								<div class="product_image">
+									<img src="{% static 'images/product_3.jpg' %}" alt="">
+								</div>
+								<div class="rating rating_4">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+								</div>
+								<div class="product_content clearfix">
+									<div class="product_info">
+										<div class="product_name"><a href="product.html">Man Blue Jacket</a></div>
+										<div class="product_price">$145.00</div>
+									</div>
+									<div class="product_options">
+										<div class="product_buy product_option"><img src="{% static 'images/shopping-bag-white.svg' %}" alt=""></div>
+										<div class="product_fav product_option">+</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<!-- Extra -->
+
+			<div class="extra clearfix">
+				<div class="extra_promo extra_promo_1">
+					<div class="extra_promo_image" style="background-image:url({% static 'images/extra_1.jpg' %})"></div>
+					<div class="extra_1_content d-flex flex-column align-items-center justify-content-center text-center">
+						<div class="extra_1_price">30%<span>off</span></div>
+						<div class="extra_1_title">On all shoes</div>
+						<div class="extra_1_text">*Integer ut imperdiet erat. Quisque ultricies lectus tellus, eu tristique magna pharetra.</div>
+						<div class="button extra_1_button"><a href="checkout.html">check out</a></div>
+					</div>
+				</div>
+				<div class="extra_promo extra_promo_2">
+					<div class="extra_promo_image" style="background-image:url({% static 'images/extra_2.jpg' %})"></div>
+					<div class="extra_2_content d-flex flex-column align-items-center justify-content-center text-center">
+						<div class="extra_2_title">
+							<div class="extra_2_center">&</div>
+							<div class="extra_2_top">Mix</div>
+							<div class="extra_2_bottom">Match</div>
+						</div>
+						<div class="extra_2_text">*Integer ut imperdiet erat. Quisque ultricies lectus tellus, eu tristique magna pharetra.</div>
+						<div class="button extra_2_button"><a href="checkout.html">check out</a></div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Gallery -->
+
+			<div class="gallery">
+				<div class="gallery_image" style="background-image:url({% static 'images/gallery.jpg' %})"></div>
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="gallery_title text-center">
+								<ul>
+									<li><a href="#">#wish</a></li>
+									<li><a href="#">#wishinstagram</a></li>
+									<li><a href="#">#wishgirl</a></li>
+								</ul>
+							</div>
+							<div class="gallery_text text-center">*Integer ut imperdiet erat. Quisque ultricies lectus tellus, eu tristique magna pharetra.</div>
+							<div class="button gallery_button"><a href="#">submit</a></div>
+						</div>
+					</div>
+				</div>
+				<div class="gallery_slider_container">
+
+					<!-- Gallery Slider -->
+					<div class="owl-carousel owl-theme gallery_slider">
+
+						<!-- Gallery Item -->
+						<div class="owl-item gallery_item">
+							<a class="colorbox" href="{% static 'images/gallery_1.jpg' %}">
+								<img src="{% static 'images/gallery_1.jpg' %}" alt="">
+							</a>
+						</div>
+
+						<!-- Gallery Item -->
+						<div class="owl-item gallery_item">
+							<a class="colorbox" href="{% static 'images/gallery_2.jpg' %}">
+								<img src="{% static 'images/gallery_2.jpg' %}" alt="">
+							</a>
+						</div>
+
+						<!-- Gallery Item -->
+						<div class="owl-item gallery_item">
+							<a class="colorbox" href="{% static 'images/gallery_3.jpg' %}">
+								<img src="{% static 'images/gallery_3.jpg' %}" alt="">
+							</a>
+						</div>
+
+						<!-- Gallery Item -->
+						<div class="owl-item gallery_item">
+							<a class="colorbox" href="{% static 'images/gallery_4.jpg' %}">
+								<img src="{% static 'images/gallery_4.jpg' %}" alt="">
+							</a>
+						</div>
+
+						<!-- Gallery Item -->
+						<div class="owl-item gallery_item">
+							<a class="colorbox" href="{% static 'images/gallery_5.jpg' %}">
+								<img src="{% static 'images/gallery_5.jpg' %}" alt="">
+							</a>
+						</div>
+
+						<!-- Gallery Item -->
+						<div class="owl-item gallery_item">
+							<a class="colorbox" href="{% static 'images/gallery_6.jpg' %}">
+								<img src="{% static 'images/gallery_6.jpg' %}" alt="">
+							</a>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<!-- Testimonials -->
+
+			<div class="testimonials">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="section_title_container text-center">
+								<div class="section_subtitle">only the best</div>
+								<div class="section_title">testimonials</div>
+							</div>
+						</div>
+					</div>
+					<div class="row test_slider_container">
+						<div class="col">
+
+							<!-- Testimonials Slider -->
+							<div class="owl-carousel owl-theme test_slider text-center">
+
+								<!-- Testimonial Item -->
+								<div class="owl-item">
+									<div class="test_text">“Integer ut imperdiet erat. Quisque ultricies lectus tellus, eu tristique magna pharetra nec. Fusce vel lorem libero. Integer ex mi, facilisis sed nisi ut, vestibulum ultrices nulla. Aliquam egestas tempor leo.”</div>
+									<div class="test_content">
+										<div class="test_image"><img src="{% static 'images/testimonials.jpg' %}" alt=""></div>
+										<div class="test_name">Christinne Smith</div>
+										<div class="test_title">client</div>
+									</div>
+								</div>
+
+								<!-- Testimonial Item -->
+								<div class="owl-item">
+									<div class="test_text">“Integer ut imperdiet erat. Quisque ultricies lectus tellus, eu tristique magna pharetra nec. Fusce vel lorem libero. Integer ex mi, facilisis sed nisi ut, vestibulum ultrices nulla. Aliquam egestas tempor leo.”</div>
+									<div class="test_content">
+										<div class="test_image"><img src="{% static 'images/testimonials.jpg' %}" alt=""></div>
+										<div class="test_name">Christinne Smith</div>
+										<div class="test_title">client</div>
+									</div>
+								</div>
+
+								<!-- Testimonial Item -->
+								<div class="owl-item">
+									<div class="test_text">“Integer ut imperdiet erat. Quisque ultricies lectus tellus, eu tristique magna pharetra nec. Fusce vel lorem libero. Integer ex mi, facilisis sed nisi ut, vestibulum ultrices nulla. Aliquam egestas tempor leo.”</div>
+									<div class="test_content">
+										<div class="test_image"><img src="{% static 'images/testimonials.jpg' %}" alt=""></div>
+										<div class="test_name">Christinne Smith</div>
+										<div class="test_title">client</div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Newsletter -->
+
+			<div class="newsletter">
+				<div class="newsletter_content">
+					<div class="newsletter_image" style="background-image:url({% static 'images/newsletter.jpg' %})"></div>
+					<div class="container">
+						<div class="row">
+							<div class="col">
+								<div class="section_title_container text-center">
+									<div class="section_subtitle">only the best</div>
+									<div class="section_title">subscribe for a 20% discount</div>
+								</div>
+							</div>
+						</div>
+						<div class="row newsletter_container">
+							<div class="col-lg-10 offset-lg-1">
+								<div class="newsletter_form_container">
+									<form action="#">
+										<input type="email" class="newsletter_input" required="required" placeholder="E-mail here">
+										<button type="submit" class="newsletter_button">subscribe</button>
+									</form>
+								</div>
+								<div class="newsletter_text">Integer ut imperdiet erat. Quisque ultricies lectus tellus, eu tristique magna pharetra nec. Fusce vel lorem libero. Integer ex mi, facilisis sed nisi ut, vestib ulum ultrices nulla. Aliquam egestas tempor leo.</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Footer -->
+
+			<footer class="footer">
+				<div class="container">
+					<div class="row">
+						<div class="col text-center">
+							<div class="footer_logo"><a href="#">Wish</a></div>
+							<nav class="footer_nav">
+								<ul>
+									<li><a href="index.html">home</a></li>
+									<li><a href="categories.html">clothes</a></li>
+									<li><a href="categories.html">accessories</a></li>
+									<li><a href="categories.html">lingerie</a></li>
+									<li><a href="contact.html">contact</a></li>
+								</ul>
+							</nav>
+							<div class="footer_social">
+								<ul>
+									<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+									<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+									<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+									<li><a href="#"><i class="fa fa-reddit-alien" aria-hidden="true"></i></a></li>
+									<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+								</ul>
+							</div>
+							<div class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+		Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+		<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+
+		<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+		<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+		<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+		<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+		<script src="{% static 'plugins/easing/easing.js' %}"></script>
+		<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+		<script src="{% static 'plugins/colorbox/jquery.colorbox-min.js' %}"></script>
+		<script src="{% static 'js/custom.js' %}"></script>
+	</body>
 </html>
