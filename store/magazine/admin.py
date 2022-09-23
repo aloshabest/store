@@ -1,8 +1,9 @@
 from django.contrib import admin
+from mptt.admin import MPTTModelAdmin
 from .models import *
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(MPTTModelAdmin):
     list_display = ['title', 'slug']
     prepopulated_fields = {'slug': ('title',)}
 
