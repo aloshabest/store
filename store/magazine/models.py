@@ -24,12 +24,14 @@ class Product(models.Model):
     slug = models.SlugField(max_length=255, verbose_name='Url', unique=True)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(upload_to='photo/%Y/%m/%d', default=None, blank=True, verbose_name='Фото')
     category = TreeForeignKey(Category, on_delete=models.PROTECT,  blank=True, null=True, related_name='products')
     stock = models.PositiveIntegerField()
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    image_first = models.ImageField(upload_to='photo/%Y/%m/%d', default=None, blank=True, verbose_name='Фото')
+    image_second = models.ImageField(upload_to='photo/%Y/%m/%d', default=None, blank=True, null=True, verbose_name='Фото')
+    image_third = models.ImageField(upload_to='photo/%Y/%m/%d', default=None, blank=True, null=True, verbose_name='Фото')
 
     class Meta:
         ordering = ('title',)
