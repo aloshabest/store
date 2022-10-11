@@ -22,3 +22,21 @@ def single(request, prod_slug):
         'product': product,
     }
     return render(request, template, context)
+
+
+def shop(request):
+    template = 'magazine/shop.html'
+    product = Product.objects.all()
+    res = [(cat, Category.objects.filter(parent_id=cat)) for cat in Category.objects.filter(parent_id=None)]
+
+    # cat = Category.objects.filter(parent_id=None)
+    # ls = []
+    # for i in cat:
+    #     c = Category.objects.filter(parent_id=cat)
+    #     ls.append(c)
+
+
+    context = {
+        'res': res,
+    }
+    return render(request, template, context)
