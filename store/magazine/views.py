@@ -1,40 +1,33 @@
 from django.shortcuts import render, get_object_or_404
 from .models import *
+from django.shortcuts import render
+from django.views import View
 
 
-def index(request):
-    template = 'magazine/index.html'
-    categories = Category.objects.filter(parent_id=None)
-    products = Product.objects.all()
+class Index(View):
 
-    context = {
-        'categories': categories,
-        'products': products,
-    }
-    return render(request, template, context)
+    def get(self, request, *args, **kwargs):
+        categories = Category.objects.filter(parent_id=None)
+        products = Product.objects.all()
+        return render(request, 'magazine/index.html', context={
+            'categories': categories,
+            'products': products,
+        })
 
 
-def single(request, prod_slug):
-    template = 'magazine/single_product.html'
-    product = get_object_or_404(Product, slug=prod_slug)
+class Single(View):
 
-    context = {
-        'product': product,
-    }
-    return render(request, template, context)
+    def get(self, request, prod_slug, *args, **kwargs):
+        product = get_object_or_404(Product, slug=prod_slug)
+        return render(request, 'magazine/single_product.html', context={
+            'product': product,
+        })
 
 
 def shop(request):
     template = 'magazine/shop.html'
     product = Product.objects.all()
     res = [(cat, Category.objects.filter(parent_id=cat)) for cat in Category.objects.filter(parent_id=None)]
-
-    # cat = Category.objects.filter(parent_id=None)
-    # ls = []
-    # for i in cat:
-    #     c = Category.objects.filter(parent_id=cat)
-    #     ls.append(c)
-
 
     context = {
         'res': res,
