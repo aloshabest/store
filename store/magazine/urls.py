@@ -4,6 +4,6 @@ from .views import *
 app_name = 'magazine'
 
 urlpatterns = [
-    path('', index, name='index'),
+    path('', index, name='home'),
     path('products/<slug:prod_slug>/', single, name='single'),
 ]
