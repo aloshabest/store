@@ -1,6 +1,7 @@
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
 from django.urls import reverse
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Category(MPTTModel):
@@ -23,7 +24,7 @@ class Category(MPTTModel):
 class Product(models.Model):
     title = models.CharField(max_length=255, verbose_name='Название')
     slug = models.SlugField(max_length=255, verbose_name='Url', unique=True)
-    description = models.TextField(blank=True)
+    description = RichTextUploadingField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     category = TreeForeignKey(Category, on_delete=models.PROTECT,  blank=True, null=True, related_name='products')
     stock = models.PositiveIntegerField()

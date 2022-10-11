@@ -113,9 +113,9 @@
                 <li data-toggle="collapse" data-target="#{{ cat.title }}">
                   <a href="#">{{ cat.title }}</a>
                   <ul class="sub-menu collapse show" id="{{ cat.title }}">
-                    <li><a href="#">All</a></li>
+                    <li><a href="{% url 'magazine:home' %}">All</a></li>
                     {% for c in u_cat %}
-                    <li><a href="#">{{ c.title }}</a></li>
+                    <li><a href="{% url 'magazine:home' %}">{{ c.title }}</a></li>
                     {% endfor %}
                   </ul>
                 </li>
