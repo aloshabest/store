@@ -20,6 +20,8 @@ class Category(MPTTModel):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('magazine:category', kwargs={'cat_slug': self.slug})
 
 class Product(models.Model):
     title = models.CharField(max_length=255, verbose_name='Название')

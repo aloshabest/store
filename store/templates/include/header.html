@@ -19,15 +19,15 @@
                 <!-- Nav Start -->
                 <div class="classynav">
                     <ul>
-                        <li><a href="{% url 'magazine:shop' %}">Shop</a>
+                        <li><a href="#">Shop</a>
                             <div class="megamenu">
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Women's Collection</li>
-                                    <li><a href="shop.html">Dresses</a></li>
-                                    <li><a href="shop.html">Blouses &amp; Shirts</a></li>
-                                    <li><a href="shop.html">T-shirts</a></li>
-                                    <li><a href="shop.html">Rompers</a></li>
-                                    <li><a href="shop.html">Bras &amp; Panties</a></li>
+                                    <li><a href="{% url 'magazine:shop' 'dresses' %}">Dresses</a></li>
+                                    <li><a href="{% url 'magazine:shop' 'blouses' %}">Blouses</a></li>
+                                    <li><a href="{% url 'magazine:shop' 'shirts' %}">T-shirts</a></li>
+                                    <li><a href="{% url 'magazine:shop' 'rompers' %}">Rompers</a></li>
+                                    <li><a href="{% url 'magazine:shop' 'panties' %}">Panties</a></li>
                                 </ul>
                                 <ul class="single-mega cn-col-4">
                                     <li class="title">Men's Collection</li>

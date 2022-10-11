@@ -106,7 +106,7 @@
             <h2>{{ product.title }}</h2>
         </a>
         <p class="product-price"><span class="old-price">$65.00</span> ${{ product.price }}</p>
-        <p class="product-desc">{{ product.description }}</p>
+        <p class="product-desc">{{ product.description|safe }}</p>
 
         <!-- Form -->
         <form class="cart-form clearfix" method="post">
