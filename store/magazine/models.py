@@ -1,5 +1,6 @@
 from django.db import models
 from mptt.models import MPTTModel, TreeForeignKey
+from django.urls import reverse
 
 
 class Category(MPTTModel):
@@ -41,3 +42,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('magazine:single', kwargs={'prod_slug': self.slug})

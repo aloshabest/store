@@ -193,7 +193,7 @@
                         <!-- Product Description -->
                         <div class="product-description">
                             <span>{{ p.category }}</span>
-                            <a href="single-product-details.html">
+                            <a href="{{ p.get_absolute_url }}">
                                 <h6>{{ p.title }}</h6>
                             </a>
                             <p class="product-price">${{ p.price }}</p>

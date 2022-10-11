@@ -12,3 +12,14 @@ def index(request):
         'products': products,
     }
     return render(request, template, context)
+
+
+def single(request, prod_slug):
+    template = 'magazine/single_product.html'
+    #template = 'magazine/single-product-details.html'
+    product = get_object_or_404(Product, slug=prod_slug)
+
+    context = {
+        'product': product,
+    }
+    return render(request, template, context)
