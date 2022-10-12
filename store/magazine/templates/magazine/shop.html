@@ -110,7 +110,8 @@
               <ul id="menu-content2" class="menu-content collapse show">
                 <!-- Single Item -->
                 {% for cat, u_cat in res %}
-                <li data-toggle="collapse" data-target="#{{ cat.title }}">
+                {% if cat in show %}
+                <li data-toggle="collapse" data-target="#{{ cat.title }}" class="collapsed">
                   <a href="#">{{ cat.title }}</a>
                   <ul class="sub-menu collapse show" id="{{ cat.title }}">
                     <li><a href="{% url 'magazine:shop' cat.slug %}">All</a></li>
@@ -119,6 +120,17 @@
                     {% endfor %}
                   </ul>
                 </li>
+                {% else %}
+                <li data-toggle="collapse" data-target="#{{ cat.title }}" class="collapsed">
+                  <a href="#">{{ cat.title }}</a>
+                  <ul class="sub-menu collapse" id="{{ cat.title }}">
+                    <li><a href="{% url 'magazine:shop' cat.slug %}">All</a></li>
+                    {% for c in u_cat %}
+                    <li><a href="{% url 'magazine:shop' c.slug %}">{{ c.title }}</a></li>
+                    {% endfor %}
+                  </ul>
+                </li>
+                {% endif %}
                 {% endfor %}
               </ul>
             </div>
@@ -233,7 +245,7 @@
                 <!-- Product Description -->
                 <div class="product-description">
                   <span>topshop</span>
-                  <a href="single-product-details.html">
+                  <a href="{{ prod.get_absolute_url }}">
                     <h6>{{ prod.title }}</h6>
                   </a>
                   <p class="product-price"><span class="old-price">$75.00</span> ${{ prod.price }}</p>
