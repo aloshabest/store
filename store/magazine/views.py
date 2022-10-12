@@ -50,7 +50,7 @@ class Single(DetailView):
 
 class Shop(View):
     def get(self, request, cat_slug, *args, **kwargs):
-
+        print(request)
         template = 'magazine/shop.html'
         res = [(cat, Category.objects.filter(parent_id=cat)) for cat in Category.objects.filter(parent_id=None)]
 
@@ -70,4 +70,10 @@ class Shop(View):
             'show': show,
         }
         return render(request, template, context)
+    def post(self, request,  *args, **kwargs):
+        print()
+        print(request)
+        print()
+
+
 

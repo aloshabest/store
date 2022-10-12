@@ -36,6 +36,7 @@ class Product(models.Model):
     image_first = models.ImageField(upload_to='photo/%Y/%m/%d', default=None, blank=True, verbose_name='Фото')
     image_second = models.ImageField(upload_to='photo/%Y/%m/%d', default=None, blank=True, null=True, verbose_name='Фото')
     image_third = models.ImageField(upload_to='photo/%Y/%m/%d', default=None, blank=True, null=True, verbose_name='Фото')
+    type = models.TextField(blank=True)
 
     class Meta:
         ordering = ('title',)

@@ -108,7 +108,20 @@
             <!--  Catagories  -->
             <div class="catagories-menu">
               <ul id="menu-content2" class="menu-content collapse show">
+
+                <li data-toggle="collapse" data-target="#" class="collapsed">
+                  <a href="{% url 'magazine:shop' 'dresses' %}">Men</a>
+                </li>
+
+                <li data-toggle="collapse" data-target="#" class="collapsed">
+                  <a href="{% url 'magazine:shop' 'women' %}">Women</a>
+                </li>
+
+                <li data-toggle="collapse" data-target="#" class="collapsed">
+                  <a href="#">Kid</a>
+                </li>
                 <!-- Single Item -->
+
                 {% for cat, u_cat in res %}
                 {% if cat in show %}
                 <li data-toggle="collapse" data-target="#{{ cat.title }}" class="collapsed">
