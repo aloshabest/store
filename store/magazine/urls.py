@@ -5,6 +5,6 @@ app_name = 'magazine'
 
 urlpatterns = [
     path('', Index.as_view(), name='home'),
-    path('shop/<slug:cat_slug>/', shop, name='shop'),
+    path('shop/<slug:cat_slug>/', Shop.as_view(), name='shop'),
     path('products/<slug:prod_slug>/', Single.as_view(), name='single'),
 ]

@@ -48,31 +48,31 @@ class Single(DetailView):
         return context
 
 
+class Shop(View):
+    def get(self, request, cat_slug, *args, **kwargs):
 
-def shop(request, cat_slug):
+        template = 'magazine/shop.html'
+        res = [(cat, Category.objects.filter(parent_id=cat)) for cat in Category.objects.filter(parent_id=None)]
 
-    template = 'magazine/shop.html'
-    res = [(cat, Category.objects.filter(parent_id=cat)) for cat in Category.objects.filter(parent_id=None)]
+        category = None
+        categories = Category.objects.all()
+        products = Product.objects.filter(available=True)
 
-    category = None
-    categories = Category.objects.all()
-    products = Product.objects.filter(available=True)
+        if cat_slug:
+            category = get_object_or_404(Category, slug=cat_slug)
+            products = Product.objects.filter(category=category)
 
-    if cat_slug:
-        category = get_object_or_404(Category, slug=cat_slug)
-        products = Product.objects.filter(category=category)
+            if category.parent_id == None:
+                sub1 = list(Category.objects.filter(parent=category))
+                sub2 = list(Category.objects.filter(parent__in=sub1))
 
-        if category.parent_id == None:
-            sub1 = list(Category.objects.filter(parent=category))
-            sub2 = list(Category.objects.filter(parent__in=sub1))
+                products = Product.objects.filter(category__in=sub1 + sub2)
 
-            products = Product.objects.filter(category__in=sub1 + sub2)
-
-    context = {
-        'res': res,
-        'category': category,
-        'categories': categories,
-        'products': products,
-    }
-    return render(request, template, context)
+        context = {
+            'res': res,
+            'category': category,
+            'categories': categories,
+            'products': products,
+        }
+        return render(request, template, context)
 
