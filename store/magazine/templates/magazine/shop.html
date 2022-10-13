@@ -124,7 +124,7 @@
               <div class="product-topbar d-flex align-items-center justify-content-between">
                 <!-- Total Products -->
                 <div class="total-products">
-                  <p><span>186</span> products found</p>
+                  <p><span>{{ count }}</span> products found</p>
                 </div>
                 <!-- Sorting -->
                 <div class="product-sorting d-flex">
@@ -144,7 +144,7 @@
           </div>
 
           <div class="row">
-            {% for prod in products %}
+            {% for prod in page_obj %}
             <!-- Single Product -->
             <div class="col-12 col-sm-6 col-lg-4">
               <div class="single-product-wrapper">
@@ -190,17 +190,7 @@
           </div>
         </div>
         <!-- Pagination -->
-        <nav aria-label="navigation">
-          <ul class="pagination mt-50 mb-70">
-            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">...</a></li>
-            <li class="page-item"><a class="page-link" href="#">21</a></li>
-            <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
-          </ul>
-        </nav>
+        {% include 'include/paginator.html' %}
       </div>
     </div>
   </div>

@@ -3,7 +3,7 @@ from .models import *
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView
-from django.db.models import F
+from django.core.paginator import Paginator
 
 
 # class Index(View):
@@ -117,11 +117,19 @@ class Shop(View):
 
             show = Category.objects.filter(title=category)
 
+        count = products.count()
+
+        paginator = Paginator(products, 9)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
         context = {
             'res': res,
             'products': products,
             'show': show,
             'type': type,
             'category': category,
+            'count': count,
+            'page_obj':page_obj,
         }
         return render(request, template, context)
