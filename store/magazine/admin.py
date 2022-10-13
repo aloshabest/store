@@ -4,7 +4,7 @@ from .models import *
 
 
 class CategoryAdmin(MPTTModelAdmin):
-    list_display = ['title', 'slug', 'image']
+    list_display = ['title', 'slug', 'type', 'image']
     prepopulated_fields = {'slug': ('title',)}
 
 

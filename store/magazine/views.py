@@ -48,32 +48,80 @@ class Single(DetailView):
         return context
 
 
-class Shop(View):
-    def get(self, request, cat_slug, *args, **kwargs):
-        print(request)
-        template = 'magazine/shop.html'
-        res = [(cat, Category.objects.filter(parent_id=cat)) for cat in Category.objects.filter(parent_id=None)]
+# class ShopWomen(View):
+#     def get(self, request, cat_slug, *args, **kwargs):
+#
+#         template = 'magazine/shop.html'
+#         res = [(cat, Category.objects.filter(parent_id=cat)) for cat in Category.objects.filter(parent_id=None)]
+#
+#         category = get_object_or_404(Category, slug=cat_slug)
+#         products = Product.objects.filter(category=category, type='Women')
+#         show = Category.objects.filter(id=category.parent_id)
+#
+#         if category.parent_id == None:
+#             sub1 = list(Category.objects.filter(parent=category))
+#             sub2 = list(Category.objects.filter(parent__in=sub1))
+#
+#             products = Product.objects.filter(category__in=sub1 + sub2, type='Women')
+#
+#         context = {
+#             'res': res,
+#             'products': products,
+#             'show': show,
+#         }
+#         return render(request, template, context)
+#
+#
+# class ShopMen(View):
+#     def get(self, request, cat_slug, *args, **kwargs):
+#
+#         template = 'magazine/shop.html'
+#         res = [(cat, Category.objects.filter(parent_id=cat)) for cat in Category.objects.filter(parent_id=None)]
+#
+#         category = get_object_or_404(Category, slug=cat_slug)
+#         products = Product.objects.filter(category=category, type='Men')
+#         show = Category.objects.filter(id=category.parent_id)
+#
+#         if category.parent_id == None:
+#             sub1 = list(Category.objects.filter(parent=category))
+#             sub2 = list(Category.objects.filter(parent__in=sub1))
+#
+#             products = Product.objects.filter(category__in=sub1 + sub2, type='Men')
+#
+#         context = {
+#             'res': res,
+#             'products': products,
+#             'show': show,
+#         }
+#         return render(request, template, context)
 
+class Shop(View):
+    def get(self, request, type, cat_slug, *args, **kwargs):
+        template = 'magazine/shop.html'
+
+        # список из общих категорий, проходящих по гендеру и подкатегорий основных категорий
+        res = [(cat, Category.objects.filter(parent_id=cat, type=type)) for cat in Category.objects.filter(parent_id=None, type__in=(type, 'all'))]
+
+        # категория по слагу и продукты по этой категории
         category = get_object_or_404(Category, slug=cat_slug)
         products = Product.objects.filter(category=category)
+
+        # открывает шторку выбранной категории в списке
         show = Category.objects.filter(id=category.parent_id)
 
+        # показать все продукты по общей категории
         if category.parent_id == None:
-            sub1 = list(Category.objects.filter(parent=category))
+            sub1 = list(Category.objects.filter(parent=category, type=type))
             sub2 = list(Category.objects.filter(parent__in=sub1))
-
             products = Product.objects.filter(category__in=sub1 + sub2)
+
+            show = Category.objects.filter(title=category)
 
         context = {
             'res': res,
             'products': products,
             'show': show,
+            'type': type,
+            'category': category,
         }
         return render(request, template, context)
-    def post(self, request,  *args, **kwargs):
-        print()
-        print(request)
-        print()
-
-
-

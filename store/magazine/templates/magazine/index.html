@@ -184,12 +184,7 @@
                         <div class="product-img">
                             <img src="{{ p.image_first.url }}" alt="">
                             <!-- Hover Thumb -->
-                            {% if product.image_second %}
                             <img class="hover-img" src="{{ p.image_second.url }}" alt="">
-                            {% endif %}
-                            {% if product.image_third %}
-                            <img src="{{ product.image_third.url }}">
-                            {% endif %}
                             <!-- Favourite -->
                             <div class="product-favourite">
                                 <a href="#" class="favme fa fa-heart"></a>
