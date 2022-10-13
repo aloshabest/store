@@ -24,6 +24,7 @@ class Category(MPTTModel):
     def get_absolute_url(self):
         return reverse('magazine:category', kwargs={'cat_slug': self.slug})
 
+
 class Product(models.Model):
     title = models.CharField(max_length=255, verbose_name='Название')
     slug = models.SlugField(max_length=255, verbose_name='Url', unique=True)
@@ -49,3 +50,15 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('magazine:single', kwargs={'prod_slug': self.slug})
+
+
+class Sale(models.Model):
+    prod = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True, verbose_name='Скидка')
+    sale = models.IntegerField(default=0, verbose_name='Сумма скидки')
+    last_price = models.FloatField(default=0, verbose_name='Старая цена')
+    new_price = models.FloatField(default=0, verbose_name='Новая цена')
+
+    class Meta:
+        ordering = ('sale',)
+        verbose_name = 'Скидка'
+        verbose_name_plural = 'Скидки'

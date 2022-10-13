@@ -123,13 +123,16 @@ class Shop(View):
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
 
+        sale, sale_prod = [i.prod for i in Sale.objects.all()], Sale.objects.all()
+
+
         context = {
             'res': res,
-            'products': products,
+            'sale': sale,
             'show': show,
             'type': type,
             'category': category,
             'count': count,
-            'page_obj':page_obj,
+            'page_obj': page_obj,
         }
         return render(request, template, context)
