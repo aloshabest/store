@@ -18,18 +18,11 @@ class Index(ListView):
         return context
 
 
-# class Contact(ListView):
-#     template_name = 'magazine/contact.html'
-#
-#     def get_context_data(self, *, object_list=None, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         return context
-
-
 class Contact(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'magazine/contact.html', context={
         })
+
 
 class Single(DetailView):
     model = Product
@@ -41,53 +34,6 @@ class Single(DetailView):
         context = super().get_context_data(**kwargs)
         return context
 
-
-# class ShopWomen(View):
-#     def get(self, request, cat_slug, *args, **kwargs):
-#
-#         template = 'magazine/shop.html'
-#         res = [(cat, Category.objects.filter(parent_id=cat)) for cat in Category.objects.filter(parent_id=None)]
-#
-#         category = get_object_or_404(Category, slug=cat_slug)
-#         products = Product.objects.filter(category=category, type='Women')
-#         show = Category.objects.filter(id=category.parent_id)
-#
-#         if category.parent_id == None:
-#             sub1 = list(Category.objects.filter(parent=category))
-#             sub2 = list(Category.objects.filter(parent__in=sub1))
-#
-#             products = Product.objects.filter(category__in=sub1 + sub2, type='Women')
-#
-#         context = {
-#             'res': res,
-#             'products': products,
-#             'show': show,
-#         }
-#         return render(request, template, context)
-#
-#
-# class ShopMen(View):
-#     def get(self, request, cat_slug, *args, **kwargs):
-#
-#         template = 'magazine/shop.html'
-#         res = [(cat, Category.objects.filter(parent_id=cat)) for cat in Category.objects.filter(parent_id=None)]
-#
-#         category = get_object_or_404(Category, slug=cat_slug)
-#         products = Product.objects.filter(category=category, type='Men')
-#         show = Category.objects.filter(id=category.parent_id)
-#
-#         if category.parent_id == None:
-#             sub1 = list(Category.objects.filter(parent=category))
-#             sub2 = list(Category.objects.filter(parent__in=sub1))
-#
-#             products = Product.objects.filter(category__in=sub1 + sub2, type='Men')
-#
-#         context = {
-#             'res': res,
-#             'products': products,
-#             'show': show,
-#         }
-#         return render(request, template, context)
 
 class Shop(View):
     def get(self, request, type, cat_slug, *args, **kwargs):
@@ -118,7 +64,6 @@ class Shop(View):
         page_obj = paginator.get_page(page_number)
 
         sale, sale_prod = [i.prod for i in Sale.objects.all()], Sale.objects.all()
-
 
         context = {
             'res': res,

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Profile Page{% endblock title %}
+
+{% block content %}
+{% load user_filters %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 p-5">
+            <div class="card">
+                <div class="card-header">
+                    Новый пост
+                </div>
+                <div class="card-body">
+                    <form enctype="multipart/form-data" method="post">
+
+                        {% csrf_token %}
+
+                        {% for field in profile_form %}
+                        <div class="col-md-12 form-group">
+                            <label for="{{ field.id_for_label }}">
+                                {{ field.label }}
+                                {% if field.field.required %}
+                                <span class="required text-danger">*</span>
+                                {% endif %}
+                            </label>
+                            {{ field|addclass:'form-control' }}
+                            {% if field.help_text %}
+                            <small id="{{ field.id_for_label }}-help" class="form-text text-muted">
+                                {{ field.help_text|safe }}
+                            </small>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                        <div class="col-md-6 offset-md-4" style="margin-left: 500px;">
+                            <button type="submit" class="save btn btn-default">
+                                Сохранить изменения
+                            </button>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
