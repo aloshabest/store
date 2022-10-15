@@ -4,6 +4,11 @@ from django.urls import reverse_lazy
 from .forms import CreationForm, ProfileForm
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
+from django.views import View
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
 
 
 def password_reset_form(request):
@@ -16,11 +21,25 @@ class SignUp(CreateView):
     template_name = 'users/signup.html'
 
 
+class Profile(View):
+
+    def get(self, request, *args, **kwargs):
+        template = 'users/profile.html'
+        user = User.objects.filter(username=request.user)
+        print()
+        print(user)
+        print()
+
+        context = {
+            'user': user,
+        }
+        return render(request, template, context)
+
 @login_required
 @transaction.atomic
 def update_profile(request, slug):
     if request.method == 'POST':
-        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.author)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user)
         if profile_form.is_valid():
             post = profile_form.save(commit=False)
             post.save()
@@ -28,7 +47,7 @@ def update_profile(request, slug):
 
     else:
         profile_form = ProfileForm(instance=request.user)
-    return render(request, 'magazine/index.html', {
+    return render(request, 'users/profile_edit.html', {
         'profile_form': profile_form
     })
 

@@ -82,7 +82,8 @@
                     <ul>
                         <li><a href="#"><img src="{% static 'img/core-img/user.svg' %}" alt=""></a>
                             <ul class="dropdown">
-                                <li><a href="index.html">Profile</a></li>
+                                <li><a href="{% url 'users:profile' %}">Profile</a></li>
+                                <li><a href="{% url 'users:profile_edit' 'get_edit' %}">EditProfile</a></li>
                                 <li><a href="{% url 'users:logout' %}">Logout</a></li>
                             </ul>
                         </li>

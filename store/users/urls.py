@@ -6,7 +6,8 @@ app_name = 'users'
 
 urlpatterns = [
     path('', password_reset_form, name='password_reset_form'),
-    path('profile/<slug:slug>/', update_profile, name='profile'),
+    path('profile/', Profile.as_view(), name='profile'),
+    path('profile/<slug:slug>/', update_profile, name='profile_edit'),
     path('signup/', SignUp.as_view(), name='signup'),
     path(
       'logout/',

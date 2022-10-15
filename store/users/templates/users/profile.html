@@ -10,37 +10,28 @@
         <div class="col-md-8 p-5">
             <div class="card">
                 <div class="card-header">
-                    Новый пост
+                    <h5 style="text-align: center">Your Profile</h5>
                 </div>
                 <div class="card-body">
-                    <form enctype="multipart/form-data" method="post">
+                    {% for u in user %}
 
-                        {% csrf_token %}
+                        {% if u.username %}
+                        <h6 class="mb-4">Username: {{ u.username }}</h6>
+                        {% endif %}
 
-                        {% for field in profile_form %}
-                        <div class="col-md-12 form-group">
-                            <label for="{{ field.id_for_label }}">
-                                {{ field.label }}
-                                {% if field.field.required %}
-                                <span class="required text-danger">*</span>
-                                {% endif %}
-                            </label>
-                            {{ field|addclass:'form-control' }}
-                            {% if field.help_text %}
-                            <small id="{{ field.id_for_label }}-help" class="form-text text-muted">
-                                {{ field.help_text|safe }}
-                            </small>
-                            {% endif %}
-                        </div>
-                        {% endfor %}
-                        <div class="col-md-6 offset-md-4" style="margin-left: 500px;">
-                            <button type="submit" class="save btn btn-default">
-                                Сохранить изменения
-                            </button>
-                        </div>
+                        {% if u.email %}
+                        <h6 class="mb-4">E-Mail: {{ u.email }}</h6>
+                        {% endif %}
 
+                        {% if u.first_name %}
+                        <h6 class="mb-4">First name: {{ u.first_name }}</h6>
+                        {% endif %}
 
-                    </form>
+                        {% if u.last_name %}
+                        <h6 class="mb-4">Last name: {{ u.last_name }}</h6>
+                        {% endif %}
+
+                    {% endfor %}
                 </div>
             </div>
         </div>
