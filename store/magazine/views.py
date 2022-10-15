@@ -6,17 +6,6 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.core.paginator import Paginator
 
 
-# class Index(View):
-#
-#     def get(self, request, *args, **kwargs):
-#         categories = Category.objects.filter(parent_id=None)
-#         products = Product.objects.all()
-#         return render(request, 'magazine/index.html', context={
-#             'categories': categories,
-#             'products': products,
-#         })
-
-
 class Index(ListView):
     model = Product
     template_name = 'magazine/index.html'
@@ -29,13 +18,18 @@ class Index(ListView):
         return context
 
 
-# class Single(View):
+# class Contact(ListView):
+#     template_name = 'magazine/contact.html'
 #
-#     def get(self, request, prod_slug, *args, **kwargs):
-#         product = get_object_or_404(Product, slug=prod_slug)
-#         return render(request, 'magazine/single_product.html', context={
-#             'product': product,
-#         })
+#     def get_context_data(self, *, object_list=None, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         return context
+
+
+class Contact(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'magazine/contact.html', context={
+        })
 
 class Single(DetailView):
     model = Product
