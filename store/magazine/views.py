@@ -75,3 +75,20 @@ class Shop(View):
             'page_obj': page_obj,
         }
         return render(request, template, context)
+
+
+class Search(ListView):
+    template_name = 'magazine/search.html'
+    context_object_name = 'products'
+    paginate_by = 9
+
+    def get_queryset(self):
+        return Product.objects.filter(title__icontains=self.request.GET.get('s'))
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['s'] = f"s={self.request.GET.get('s')}&"
+        context['sale'] = [i.prod for i in Sale.objects.all()]
+        context['sale_prod'] = Sale.objects.all()
+        context['count'] = context['products'].count()
+        return context

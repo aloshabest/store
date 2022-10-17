@@ -26,9 +26,6 @@ class Profile(View):
     def get(self, request, *args, **kwargs):
         template = 'users/profile.html'
         user = User.objects.filter(username=request.user)
-        print()
-        print(user)
-        print()
 
         context = {
             'user': user,
