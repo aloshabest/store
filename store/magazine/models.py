@@ -62,3 +62,4 @@ class Sale(models.Model):
         ordering = ('sale',)
         verbose_name = 'Скидка'
         verbose_name_plural = 'Скидки'
+

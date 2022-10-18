@@ -4,7 +4,6 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView
 from django.core.paginator import Paginator
-from cart.forms import CartAddProductForm
 
 
 class Index(ListView):
@@ -25,16 +24,19 @@ class Contact(View):
         })
 
 
-class Single(DetailView):
-    model = Product
-    template_name = 'magazine/single_product.html'
-    context_object_name = 'product'
-    slug_url_kwarg = 'prod_slug'
+def product_detail(request, prod_slug):
+    product = get_object_or_404(Product, slug=prod_slug)
+    return render(request, 'magazine/single_product.html', {'product': product})
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['cart_product_form'] = CartAddProductForm()
-        return context
+# class Single(DetailView):
+#     model = Product
+#     template_name = 'magazine/single_product.html'
+#     context_object_name = 'product'
+#     slug_url_kwarg = 'prod_slug'
+#
+#     def get_context_data(self, *, object_list=None, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         return context
 
 
 class Shop(View):

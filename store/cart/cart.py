@@ -1,78 +1,86 @@
-from decimal import Decimal
-from django.conf import settings
-from magazine.models import Product
+import datetime
+from django.db.models import Sum
+from django.db.models import F
+from . import models
+
+CART_ID = 'CART-ID'
 
 
-class Cart(object):
+class ItemAlreadyExists(Exception):
+    pass
 
+
+class ItemDoesNotExist(Exception):
+    pass
+
+
+class Cart:
     def __init__(self, request):
-        """
-        Инициализируем корзину
-        """
-        self.session = request.session
-        cart = self.session.get(settings.CART_SESSION_ID)
-        if not cart:
-            # save an empty cart in the session
-            cart = self.session[settings.CART_SESSION_ID] = {}
+        cart_id = request.session.get(CART_ID)
+        if cart_id:
+            cart = models.Cart.objects.filter(id=cart_id, checked_out=False).first()
+            if cart is None:
+                cart = self.new(request)
+        else:
+            cart = self.new(request)
         self.cart = cart
 
-    def add(self, product, quantity=1, update_quantity=False):
-        """
-        Добавить продукт в корзину или обновить его количество.
-        """
-        product_id = str(product.id)
-        if product_id not in self.cart:
-            self.cart[product_id] = {'quantity': 0, 'price': str(product.price)}
-        if update_quantity:
-            self.cart[product_id]['quantity'] = quantity
-        else:
-            self.cart[product_id]['quantity'] += quantity
-        self.save()
-
-    def save(self):
-        # Обновление сессии cart
-        self.session[settings.CART_SESSION_ID] = self.cart
-        # Отметить сеанс как "измененный", чтобы убедиться, что он сохранен
-        self.session.modified = True
-
-    def remove(self, product):
-        """
-        Удаление товара из корзины.
-        """
-        product_id = str(product.id)
-        if product_id in self.cart:
-            del self.cart[product_id]
-            self.save()
-
     def __iter__(self):
-        """
-        Перебор элементов в корзине и получение продуктов из базы данных.
-        """
-        product_ids = self.cart.keys()
-        # получение объектов product и добавление их в корзину
-        products = Product.objects.filter(id__in=product_ids)
-        for product in products:
-            self.cart[str(product.id)]['product'] = product
-
-        for item in self.cart.values():
-            item['price'] = Decimal(item['price'])
-            item['total_price'] = item['price'] * item['quantity']
+        for item in self.cart.item_set.all():
             yield item
 
-    def __len__(self):
-        """
-        Подсчет всех товаров в корзине.
-        """
-        return sum(item['quantity'] for item in self.cart.values())
+    def new(self, request):
+        cart = models.Cart.objects.create(creation_date=datetime.datetime.now())
+        request.session[CART_ID] = cart.id
+        return cart
 
-    def get_total_price(self):
-        """
-        Подсчет стоимости товаров в корзине.
-        """
-        return sum(Decimal(item['price']) * item['quantity'] for item in
-                   self.cart.values())
+    def add(self, product, unit_price, quantity=1):
+        item = models.Item.objects.filter(cart=self.cart, product=product).first()
+        if item:
+            item.unit_price = unit_price
+            item.quantity += int(quantity)
+            item.save()
+        else:
+            models.Item.objects.create(cart=self.cart, product=product, unit_price=unit_price, quantity=quantity)
+
+    def remove(self, product):
+        item = models.Item.objects.filter(cart=self.cart, product=product).first()
+        if item:
+            item.delete()
+        else:
+            raise ItemDoesNotExist
+
+    def update(self, product, quantity, unit_price=None):
+        item = models.Item.objects.filter(cart=self.cart, product=product).first()
+        if item:
+            if quantity == 0:
+                item.delete()
+            else:
+                item.unit_price = unit_price
+                item.quantity = int(quantity)
+                item.save()
+        else:
+            raise ItemDoesNotExist
+
+    def count(self):
+        return self.cart.item_set.all().aggregate(Sum('quantity')).get('quantity__sum', 0)
+
+    def summary(self):
+        return self.cart.item_set.all().aggregate(total=Sum(F('quantity')*F('unit_price'))).get('total', 0)
 
     def clear(self):
-        # удаление корзины из сессии
-        del self.session[settings.CART_SESSION_ID]
-        self.session.modified = True
+        self.cart.item_set.all().delete()
+
+    def is_empty(self):
+        return self.count() == 0
+
+    def cart_serializable(self):
+        representation = {}
+        for item in self.cart.item_set.all():
+            item_id = str(item.object_id)
+            item_dict = {
+                'total_price': item.total_price,
+                'quantity': item.quantity
+            }
+            representation[item_id] = item_dict
+        return representation
