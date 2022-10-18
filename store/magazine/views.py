@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView
 from django.core.paginator import Paginator
+from cart.forms import CartAddProductForm
 
 
 class Index(ListView):
@@ -32,6 +33,7 @@ class Single(DetailView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['cart_product_form'] = CartAddProductForm()
         return context
 
 

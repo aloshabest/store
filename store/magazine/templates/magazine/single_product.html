@@ -128,7 +128,12 @@
             <!-- Cart & Favourite Box -->
             <div class="cart-fav-box d-flex align-items-center">
                 <!-- Cart -->
-                <button type="submit" name="addtocart" value="5" class="btn essence-btn">Add to cart</button>
+                <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                    {{ cart_product_form }}
+                    {% csrf_token %}
+                    <input type="submit" value="Add to cart">
+                </form>
+<!--                <button type="submit" name="addtocart" value="5" class="btn essence-btn">Add to cart</button>-->
                 <!-- Favourite -->
                 <div class="product-favourite ml-4">
                     <a href="#" class="favme fa fa-heart"></a>

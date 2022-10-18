@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'magazine.apps.MagazineConfig',
     'users.apps.UsersConfig',
+    'cart.apps.CartConfig',
     'mptt',
     'debug_toolbar',
     'ckeditor',
@@ -180,3 +181,5 @@ CKEDITOR_CONFIGS = {
 }
 
 ###################################
+
+CART_SESSION_ID = 'cart'
