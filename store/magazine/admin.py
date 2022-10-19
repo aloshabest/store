@@ -19,6 +19,11 @@ class SaleAdmin(admin.ModelAdmin):
     list_display = ['prod', 'sale', 'last_price', 'new_price']
 
 
+class CartAdmin(admin.ModelAdmin):
+    list_display = ['customer', 'product', 'quantity']
+
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Sale, SaleAdmin)
+admin.site.register(Cart, CartAdmin)

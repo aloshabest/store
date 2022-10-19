@@ -8,6 +8,6 @@ urlpatterns = [
     path('contact/', Contact.as_view(), name='contact'),
     path('search/', Search.as_view(), name='search'),
     path('shop/<str:type>/<slug:cat_slug>/', Shop.as_view(), name='shop'),
-    path('products/<slug:prod_slug>/', product_detail, name='single'),
+    path('products/<slug:prod_slug>/', Single.as_view(), name='single'),
 
 ]

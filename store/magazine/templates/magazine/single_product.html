@@ -128,9 +128,9 @@
             <!-- Cart & Favourite Box -->
             <div class="cart-fav-box d-flex align-items-center">
                 <!-- Cart -->
-                <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                <form method="post">
                     {% csrf_token %}
-                    <input type="submit" class="btn btn-secondary" value="Добавить в корзину »">
+                    <button type="submit" name="addtocart" value="5" class="btn essence-btn">Add to cart</button>
                 </form>
 <!--                <button type="submit" name="addtocart" value="5" class="btn essence-btn">Add to cart</button>-->
                 <!-- Favourite -->

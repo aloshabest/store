@@ -1,9 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView
 from django.core.paginator import Paginator
+from .forms import *
+from django.http import HttpResponse, HttpResponseRedirect
 
 
 class Index(ListView):
@@ -24,19 +26,38 @@ class Contact(View):
         })
 
 
-def product_detail(request, prod_slug):
-    product = get_object_or_404(Product, slug=prod_slug)
-    return render(request, 'magazine/single_product.html', {'product': product})
+class Single(DetailView):
+    model = Product
+    template_name = 'magazine/single_product.html'
+    context_object_name = 'product'
+    slug_url_kwarg = 'prod_slug'
 
-# class Single(DetailView):
-#     model = Product
-#     template_name = 'magazine/single_product.html'
-#     context_object_name = 'product'
-#     slug_url_kwarg = 'prod_slug'
-#
-#     def get_context_data(self, *, object_list=None, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         return context
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = CartForm
+        return context
+
+    def post(self, request, prod_slug, *args, **kwargs):
+        prod = get_object_or_404(Product, slug=prod_slug)
+
+        try:
+            cart = get_object_or_404(Cart, customer=request.user, product=prod)
+        except:
+            cart = None
+
+        if  cart == None:
+            form = CartForm(request.POST)
+            if form.is_valid():
+                new_cart = form.save(commit=False)
+                new_cart.customer = request.user
+                new_cart.product = prod
+                new_cart.quantity = 1
+                new_cart.save()
+                return HttpResponseRedirect(new_cart.product.get_absolute_url())
+        else:
+            cart.quantity += 1
+            cart.save()
+            return HttpResponseRedirect(cart.product.get_absolute_url())
 
 
 class Shop(View):
