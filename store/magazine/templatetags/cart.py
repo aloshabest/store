@@ -2,6 +2,7 @@ from django import template
 from magazine.models import Cart
 import random
 from django.db.models import Count
+from decimal import Decimal
 
 
 register = template.Library()
@@ -24,3 +25,14 @@ def header_cart_area(user):
 def cart_item(user):
     cart = Cart.objects.filter(customer=user)
     return {'cart': cart}
+
+
+@register.inclusion_tag('magazine/summary_tpl.html')
+def summary(user):
+    cart = Cart.objects.filter(customer=user)
+    subtotal = Decimal()
+    discount = Decimal(15)
+    for c in cart:
+        subtotal += c.product.price
+    total = subtotal - subtotal * (discount / 100)
+    return {'cart': cart, 'subtotal': subtotal, 'discount': discount, 'total': total}

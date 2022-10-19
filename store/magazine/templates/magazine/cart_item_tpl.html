@@ -1,8 +1,6 @@
-{% load static %}
-
 {% for item in cart %}
 <div class="single-cart-item">
-  <a href="#" class="product-image">
+  <a href="{{ item.product.get_absolute_url }}" class="product-image">
     <img src="{{ item.product.image_first.url }}" class="cart-thumb" alt="">
     <!-- Cart Item Desc -->
     <div class="cart-item-desc">
