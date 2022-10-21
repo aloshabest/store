@@ -31,9 +31,6 @@ def cart_area(session):
 
     if cart:
         context['cart'] = cart
-        print()
-        print(cart)
-        print()
         count = 0
         for v in cart.values():
             count += int(v['quantity'])

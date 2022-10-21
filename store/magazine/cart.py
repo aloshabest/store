@@ -14,6 +14,7 @@ def add_to_cart(request, prod_slug):
         cart[prod_slug] = {
             'quantity': 1,
         }
+
     request.session.modified = True
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

@@ -90,6 +90,12 @@ class Shop(View):
         }
         return render(request, template, context)
 
+    def post(self, request, *args, **kwargs):
+        if request.POST.get("types") != None:
+            return remove_from_cart(request, request.POST.get("sl"))
+        else:
+            return add_to_cart(request, request.POST.get("sl"))
+
 
 class Search(ListView):
     template_name = 'magazine/search.html'
