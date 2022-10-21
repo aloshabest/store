@@ -40,24 +40,49 @@ class Single(DetailView):
     def post(self, request, prod_slug, *args, **kwargs):
         prod = get_object_or_404(Product, slug=prod_slug)
 
-        try:
-            cart = get_object_or_404(Cart, customer=request.user, product=prod)
-        except:
-            cart = None
+        product_id = prod_slug
 
-        if  cart == None:
-            form = CartForm(request.POST)
-            if form.is_valid():
-                new_cart = form.save(commit=False)
-                new_cart.customer = request.user
-                new_cart.product = prod
-                new_cart.quantity = 1
-                new_cart.save()
-                return HttpResponseRedirect(new_cart.product.get_absolute_url())
+        if 'cart' not in request.session:
+            request.session['cart'] = {}
+
+        cart = request.session.get('cart')
+
+        if product_id in cart:
+            cart[product_id]['quantity'] += 1
+
         else:
-            cart.quantity += 1
-            cart.save()
-            return HttpResponseRedirect(cart.product.get_absolute_url())
+            cart[product_id] = {
+                'quantity': 1
+            }
+
+        request.session.modified = True
+
+        return HttpResponseRedirect(prod.get_absolute_url())
+
+
+
+
+    # def post(self, request, prod_slug, *args, **kwargs):
+    #     prod = get_object_or_404(Product, slug=prod_slug)
+
+    #     try:
+    #         cart = get_object_or_404(Cart, customer=request.user, product=prod)
+    #     except:
+    #         cart = None
+    #
+    #     if  cart == None:
+    #         form = CartForm(request.POST)
+    #         if form.is_valid():
+    #             new_cart = form.save(commit=False)
+    #             new_cart.customer = request.user
+    #             new_cart.product = prod
+    #             new_cart.quantity = 1
+    #             new_cart.save()
+    #             return HttpResponseRedirect(new_cart.product.get_absolute_url())
+    #     else:
+    #         cart.quantity += 1
+    #         cart.save()
+    #         return HttpResponseRedirect(cart.product.get_absolute_url())
 
 
 class Shop(View):
