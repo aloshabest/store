@@ -1,5 +1,5 @@
 from .models import *
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView
 from django.core.paginator import Paginator
@@ -47,28 +47,6 @@ class Single(DetailView):
             return remove_from_cart(request, request.POST.get("sl"))
         else:
             return add_to_cart(request, prod_slug)
-
-
-# def add_to_cart(request, prod_slug, template):
-#     prod = get_object_or_404(Product, slug=prod_slug)
-#
-#     product_id = prod_slug
-#     if 'cart' not in request.session:
-#         request.session['cart'] = {}
-#
-#     cart = request.session.get('cart')
-#     if product_id in cart:
-#         cart[product_id]['quantity'] += 1
-#
-#     else:
-#         cart[product_id] = {
-#             'quantity': 1
-#         }
-#     request.session.modified = True
-#     if template == 'index':
-#         return redirect('magazine:home')
-#     else:
-#         return HttpResponseRedirect(prod.get_absolute_url())
 
 
 class Shop(View):

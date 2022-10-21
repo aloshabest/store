@@ -1,10 +1,7 @@
-from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponseRedirect
-from .models import *
 
 
 def add_to_cart(request, prod_slug):
-    prod = get_object_or_404(Product, slug=prod_slug)
 
     if 'cart' not in request.session:
         request.session['cart'] = {}
