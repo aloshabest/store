@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'magazine.apps.MagazineConfig',
     'users.apps.UsersConfig',
+    'orders.apps.OrdersConfig',
     'mptt',
     'debug_toolbar',
     'ckeditor',

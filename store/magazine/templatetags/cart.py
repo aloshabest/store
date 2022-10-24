@@ -3,6 +3,7 @@ from magazine.models import Cart, Product
 import random
 from django.db.models import Count
 from decimal import Decimal
+from django.shortcuts import get_object_or_404
 
 
 register = template.Library()
@@ -28,7 +29,9 @@ def cart_area(session):
     context = {
     }
     cart = session.get('cart', None)
-
+    print()
+    print(cart)
+    print()
     if cart:
         context['cart'] = cart
         count = 0
@@ -36,14 +39,15 @@ def cart_area(session):
             count += int(v['quantity'])
         context['count'] = count
 
-        prod = [Product.objects.filter(slug=k) for k in cart.keys()]
+        prod = [(get_object_or_404(Product, slug=k), int(v['quantity'])) for k, v in cart.items()]
+
         context['prod'] = prod
 
-        subtotal = Decimal()
-        discount = Decimal(15)
-        for item in prod:
-            for p in item:
-                subtotal += p.price
+        subtotal = float()
+        for v in cart.values():
+            subtotal += v['subtotal']
+
+        discount = float(15)
         total = subtotal - subtotal * (discount / 100)
 
         context['subtotal'] = subtotal

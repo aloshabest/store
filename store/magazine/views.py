@@ -19,10 +19,11 @@ class Index(ListView):
         return context
 
     def post(self, request, *args, **kwargs):
+        price = get_object_or_404(Product, slug=request.POST.get("sl")).price
         if request.POST.get("types") != None:
             return remove_from_cart(request, request.POST.get("sl"))
         else:
-            return add_to_cart(request, request.POST.get("sl"))
+            return add_to_cart(request, request.POST.get("sl"), price)
 
 
 class Contact(View):
@@ -43,10 +44,11 @@ class Single(DetailView):
         return context
 
     def post(self, request, prod_slug, *args, **kwargs):
+        price = get_object_or_404(Product, slug=prod_slug).price
         if request.POST.get("types") != None:
             return remove_from_cart(request, request.POST.get("sl"))
         else:
-            return add_to_cart(request, prod_slug)
+            return add_to_cart(request, prod_slug, price)
 
 
 class Shop(View):
@@ -91,10 +93,11 @@ class Shop(View):
         return render(request, template, context)
 
     def post(self, request, *args, **kwargs):
+        price = get_object_or_404(Product, slug=request.POST.get("sl")).price
         if request.POST.get("types") != None:
             return remove_from_cart(request, request.POST.get("sl"))
         else:
-            return add_to_cart(request, request.POST.get("sl"))
+            return add_to_cart(request, request.POST.get("sl"), price)
 
 
 class Search(ListView):

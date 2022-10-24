@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 
 
-def add_to_cart(request, prod_slug):
+def add_to_cart(request, prod_slug, price):
 
     if 'cart' not in request.session:
         request.session['cart'] = {}
@@ -9,10 +9,12 @@ def add_to_cart(request, prod_slug):
     cart = request.session.get('cart')
     if prod_slug in cart:
         cart[prod_slug]['quantity'] += 1
+        cart[prod_slug]['subtotal'] += float(price)
 
     else:
         cart[prod_slug] = {
             'quantity': 1,
+            'subtotal': float(price),
         }
 
     request.session.modified = True

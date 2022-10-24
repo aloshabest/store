@@ -24,8 +24,7 @@
         <div class="cart-list">
 
             <!-- Single Cart Item -->
-            {% for item in prod %}
-            {% for p in item %}
+            {% for p, q in prod %}
             <div class="single-cart-item">
                 <a href="{{ p.get_absolute_url }}" class="product-image">
                     <img src="{{ p.image_first.url }}" class="cart-thumb" alt="">
@@ -57,7 +56,6 @@
                 </a>
             </div>
             {% endfor %}
-            {% endfor %}
 
         </div>
         <!-- Cart Summary -->
@@ -71,7 +69,7 @@
                 <li><span>total:</span> <span>${{ total }}</span></li>
             </ul>
             <div class="checkout-btn mt-100">
-                <a href="checkout.html" class="btn essence-btn">check out</a>
+                <a href="{% url 'orders:order_create' %}" class="btn essence-btn">check out</a>
             </div>
         </div>
     </div>
