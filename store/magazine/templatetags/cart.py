@@ -16,11 +16,7 @@ def header_cart_area(session):
     cart = session.get('cart', None)
 
     if cart:
-        count = 0
-        for v in cart.values():
-            count += int(v['quantity'])
-        context['count'] = count
-
+        context['count'] = cart['count']
     return context
 
 
@@ -29,24 +25,16 @@ def cart_area(session):
     context = {
     }
     cart = session.get('cart', None)
-    print()
-    print(cart)
-    print()
+
     if cart:
         context['cart'] = cart
-        count = 0
-        for v in cart.values():
-            count += int(v['quantity'])
-        context['count'] = count
+        context['count'] = cart['count']
 
-        prod = [(get_object_or_404(Product, slug=k), int(v['quantity'])) for k, v in cart.items()]
+        prod = [(get_object_or_404(Product, slug=k), int(v['quantity'])) for k, v in cart.items() if k != 'subtotal' and k != 'count']
 
         context['prod'] = prod
 
-        subtotal = float()
-        for v in cart.values():
-            subtotal += v['subtotal']
-
+        subtotal = cart['subtotal']
         discount = float(15)
         total = subtotal - subtotal * (discount / 100)
 

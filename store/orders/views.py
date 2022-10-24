@@ -9,16 +9,13 @@ from decimal import Decimal
 def order_create(request):
     cart = request.session.get('cart')
 
-    prod = [(get_object_or_404(Product, slug=k), int(v['quantity'])) for k, v in cart.items()]
+    prod = [(get_object_or_404(Product, slug=k), int(v['quantity'])) for k, v in cart.items() if k != 'subtotal' and k != 'count']
 
     context = {
         'cart': cart,
         'prod': prod,
     }
-    subtotal = float()
-    for v in cart.values():
-        subtotal += v['subtotal']
-
+    subtotal = cart['subtotal']
     discount = float(15)
     total = subtotal - subtotal * (discount / 100)
 
