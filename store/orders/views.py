@@ -2,8 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from .models import OrderItem
 from .forms import OrderCreateForm
 from magazine.models import Product
-from decimal import Decimal
-
 
 
 def order_create(request):
@@ -17,7 +15,7 @@ def order_create(request):
     }
     subtotal = cart['subtotal']
     discount = float(15)
-    total = subtotal - subtotal * (discount / 100)
+    total = float("{:.2f}".format(subtotal - subtotal * (discount / 100)))
 
     context['subtotal'] = subtotal
     context['discount'] = discount

@@ -1,8 +1,5 @@
 from django import template
 from magazine.models import Cart, Product
-import random
-from django.db.models import Count
-from decimal import Decimal
 from django.shortcuts import get_object_or_404
 
 
@@ -36,7 +33,7 @@ def cart_area(session):
 
         subtotal = cart['subtotal']
         discount = float(15)
-        total = subtotal - subtotal * (discount / 100)
+        total = float("{:.2f}".format(subtotal - subtotal * (discount / 100)))
 
         context['subtotal'] = subtotal
         context['discount'] = discount
