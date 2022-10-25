@@ -152,6 +152,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MPTT_ADMIN_LEVEL_INDENT = 40
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ####################################
     ##  CKEDITOR CONFIGURATION ##

@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import OrderItem
 from .forms import OrderCreateForm
 from magazine.models import Product
+from .tasks import order_created
 
 
 def order_create(request):
@@ -26,11 +27,13 @@ def order_create(request):
         if form.is_valid():
             order = form.save()
             for item in cart:
-                prod = get_object_or_404(Product, slug=item)
+                if item != 'subtotal' and item != 'count':
+                    prod = get_object_or_404(Product, slug=item)
 
-                OrderItem.objects.create(order=order,  product=prod, price=prod.price, quantity=cart[item]['quantity'])
+                    OrderItem.objects.create(order=order,  product=prod, price=prod.price, quantity=cart[item]['quantity'])
 
             cart.clear()
+            order_created.delay(order.id)
             return render(request, 'orders/created.html',
                           {'order': order})
     else:
