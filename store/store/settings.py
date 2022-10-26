@@ -186,3 +186,5 @@ CKEDITOR_CONFIGS = {
 CONTEXT_PROCESSORS  = (
     'django.contrib.auth.context_processors.auth'
 )
+
+CELERY_BROKER_URL = 'amqp://localhost'
