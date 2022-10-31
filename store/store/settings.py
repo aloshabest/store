@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'ckeditor',
     'ckeditor_uploader',
+    'paypal.standard.ipn',
+    'payment.apps.PaymentConfig',
 ]
 
 MIDDLEWARE = [
@@ -188,3 +190,6 @@ CONTEXT_PROCESSORS  = (
 )
 
 CELERY_BROKER_URL = 'amqp://localhost'
+
+PAYPAL_RECEIVER_EMAIL = 'stormwww@yandex.ru'
+PAYPAL_TEST = True
