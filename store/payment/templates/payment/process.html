@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+ 
+{% block title %}Pay using PayPal{% endblock %}
+ 
+{% block content %}
+  <h1>Pay using PayPal</h1>
+  {{ form.render }}
+{% endblock %}
