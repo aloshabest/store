@@ -1,8 +1,14 @@
 from django.contrib import admin
+from django.urls import reverse
+from django.utils.html import format_html
 from .models import *
 import csv
 import datetime
 from django.http import HttpResponse
+
+
+def order_detail(obj):
+    return format_html(f'''<a href="{reverse('orders:admin_order_detail', args=[obj.id])}">View</a>''')
 
 
 def export_to_csv(modeladmin, request, queryset):
@@ -35,7 +41,7 @@ class OrderItemInline(admin.TabularInline):
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['id', 'first_name', 'last_name', 'email', 'country',
                     'address', 'postal_code', 'city', 'paid',
-                    'created', 'updated']
+                    'created', 'updated', order_detail]
     list_filter = ['paid', 'created', 'updated']
     inlines = [OrderItemInline]
     actions = [export_to_csv]

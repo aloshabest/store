@@ -6,4 +6,4 @@ class PaymentConfig(AppConfig):
     name = 'payment'
 
     def ready(self):
-        from .signals import handler
+        from .signals import handlers
