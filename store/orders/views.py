@@ -6,6 +6,24 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Order
 from django.urls import reverse
+from django.conf import settings
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+import os
+
+os.add_dll_directory(r"C:\Program Files\GTK3-Runtime Win64\bin")
+from weasyprint import HTML, CSS
+
+
+@staff_member_required
+def admin_order_pdf(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    html = render_to_string('orders/pdf.html', {'order': order})
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename=\
+        "order_{}.pdf"'.format(order.id)
+    HTML('https://weasyprint.org/').write_pdf('/tmp/weasyprint-website.pdf', stylesheets=[CSS(settings.STATIC_ROOT + 'css/pdf.css')])
+    return response
 
 
 @staff_member_required
