@@ -13,6 +13,7 @@ import os
 
 os.add_dll_directory(r"C:\Program Files\GTK3-Runtime Win64\bin")
 from weasyprint import HTML, CSS
+from weasyprint.text.fonts import FontConfiguration
 
 
 @staff_member_required
@@ -22,7 +23,8 @@ def admin_order_pdf(request, order_id):
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename=\
         "order_{}.pdf"'.format(order.id)
-    HTML('https://weasyprint.org/').write_pdf('/tmp/weasyprint-website.pdf', stylesheets=[CSS(settings.STATIC_ROOT + 'css/pdf.css')])
+    font_config = FontConfiguration()
+    HTML(string=html).write_pdf(response, font_config=font_config)
     return response
 
 
