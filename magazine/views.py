@@ -23,8 +23,10 @@ class Index(ListView):
         if request.POST.get("types") != None:
             return remove_from_cart(request, request.POST.get("sl"), price)
         else:
-            return add_to_cart(request, request.POST.get("sl"), price)
-
+            if request.POST.get("coupon") != None:
+                return add_coupon(request, request.POST.get("sl"))
+            else:
+                return add_to_cart(request, request.POST.get("sl"), price)
 
 class Contact(View):
     def get(self, request, *args, **kwargs):
@@ -48,7 +50,10 @@ class Single(DetailView):
         if request.POST.get("types") != None:
             return remove_from_cart(request, request.POST.get("sl"), price)
         else:
-            return add_to_cart(request, prod_slug, price)
+            if request.POST.get("coupon") != None:
+                return add_coupon(request, prod_slug)
+            else:
+                return add_to_cart(request, prod_slug, price)
 
 
 class Shop(View):
@@ -97,8 +102,10 @@ class Shop(View):
         if request.POST.get("types") != None:
             return remove_from_cart(request, request.POST.get("sl"), price)
         else:
-            return add_to_cart(request, request.POST.get("sl"), price)
-
+            if request.POST.get("coupon") != None:
+                return add_coupon(request, request.POST.get("sl"))
+            else:
+                return add_to_cart(request, request.POST.get("sl"), price)
 
 class Search(ListView):
     template_name = 'magazine/search.html'

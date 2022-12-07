@@ -65,9 +65,20 @@
             <ul class="summary-table">
                 <li><span>subtotal:</span> <span>${{ subtotal }}</span></li>
                 <li><span>delivery:</span> <span>Free</span></li>
+                {% if discount > 0 %}
                 <li><span>discount:</span> <span>-{{ discount }}%</span></li>
+                {% endif %}
                 <li><span>total:</span> <span>${{ total }}</span></li>
             </ul>
+            <div>
+                <form method="post">
+                    {{ coupon_apply_form }}
+                    <input type="hidden" name="types" value='add' />
+                    <input type="hidden" name="coupon" value='add' />
+                    <input type="submit" value="Apply">
+                    {% csrf_token %}
+                </form>
+            </div>
             <div class="checkout-btn mt-100">
                 <a href="{% url 'orders:order_create' %}" class="btn essence-btn">check out</a>
             </div>

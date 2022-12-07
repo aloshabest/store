@@ -1,4 +1,8 @@
 from django.http import HttpResponseRedirect
+from django.utils import timezone
+from coupons.models import Coupon
+from coupons.forms import CouponApplyForm
+from django.shortcuts import redirect
 
 
 def add_to_cart(request, prod_slug, price):
@@ -13,12 +17,11 @@ def add_to_cart(request, prod_slug, price):
 
     else:
         cart[prod_slug] = {
-            'quantity': 1,
+            'quantity': 1
         }
 
     cart['subtotal'] += float(price)
     cart['count'] += 1
-
     request.session.modified = True
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
@@ -34,3 +37,20 @@ def remove_from_cart(request, prod_slug, price):
 
     request.session.modified = True
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def add_coupon(request, prod_slug):
+    # cart = request.session.get('cart')
+    # now = timezone.now()
+    # form = CouponApplyForm(request.POST)
+    #
+    # if form.is_valid():
+    #     code = form.cleaned_data['code']
+    #     try:
+    #         coupon = Coupon.objects.get(code__iexact=code, valid_from__lte=now, valid_to__gte=now, active=True)
+    #         cart['discount'] = coupon.id
+    #     except Coupon.DoesNotExists:
+    #         cart['discount'] = None
+    #
+    # request.session.modified = True
+    return redirect('magazine:home')

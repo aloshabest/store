@@ -15,6 +15,6 @@ def order_created(order_id):
                                              order.id)
     mail_sent = send_mail(subject,
                           message,
-                          'stormwww@yandex.ru',
+                          'admin@myshop.com',
                           [order.email])
     return mail_sent

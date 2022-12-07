@@ -25,8 +25,9 @@ urlpatterns = [
     path('auth/', include('users.urls', namespace='users')),
     path('auth/', include('django.contrib.auth.urls')),
     path('paypal/', include('paypal.standard.ipn.urls')),
-    path('payment/', include('payment.urls')),
+    path('payment/', include('payment.urls', namespace='payment')),
     path('orders/', include('orders.urls', namespace='orders')),
+    path('coupons/', include('coupons.urls', namespace='coupons')),
     path('', include('magazine.urls')),
 ]
 
