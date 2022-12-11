@@ -72,11 +72,11 @@
             </ul>
             <div>
                 <form method="post">
+                    {% csrf_token %}
                     {{ coupon_apply_form }}
                     <input type="hidden" name="types" value='add' />
-                    <input type="hidden" name="coupon" value='add' />
+                    <input type="hidden" name="coupon" value='coupon' />
                     <input type="submit" value="Apply">
-                    {% csrf_token %}
                 </form>
             </div>
             <div class="checkout-btn mt-100">

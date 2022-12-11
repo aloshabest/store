@@ -3,7 +3,6 @@ from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView
 from django.core.paginator import Paginator
-from .forms import *
 from .cart import *
 
 
@@ -21,12 +20,13 @@ class Index(ListView):
     def post(self, request, *args, **kwargs):
         price = get_object_or_404(Product, slug=request.POST.get("sl")).price
         if request.POST.get("types") != None:
-            return remove_from_cart(request, request.POST.get("sl"), price)
-        else:
             if request.POST.get("coupon") != None:
-                return add_coupon(request, request.POST.get("sl"))
+                return add_coupon(request)
             else:
-                return add_to_cart(request, request.POST.get("sl"), price)
+                return remove_from_cart(request, request.POST.get("sl"), price)
+        else:
+            return add_to_cart(request, request.POST.get("sl"), price)
+
 
 class Contact(View):
     def get(self, request, *args, **kwargs):
@@ -42,18 +42,17 @@ class Single(DetailView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = CartForm
         return context
 
     def post(self, request, prod_slug, *args, **kwargs):
         price = get_object_or_404(Product, slug=prod_slug).price
         if request.POST.get("types") != None:
-            return remove_from_cart(request, request.POST.get("sl"), price)
-        else:
             if request.POST.get("coupon") != None:
-                return add_coupon(request, prod_slug)
+                return add_coupon(request)
             else:
-                return add_to_cart(request, prod_slug, price)
+                return remove_from_cart(request, request.POST.get("sl"), price)
+        else:
+            return add_to_cart(request, prod_slug, price)
 
 
 class Shop(View):
@@ -100,12 +99,13 @@ class Shop(View):
     def post(self, request, *args, **kwargs):
         price = get_object_or_404(Product, slug=request.POST.get("sl")).price
         if request.POST.get("types") != None:
-            return remove_from_cart(request, request.POST.get("sl"), price)
-        else:
             if request.POST.get("coupon") != None:
-                return add_coupon(request, request.POST.get("sl"))
+                return add_coupon(request)
             else:
-                return add_to_cart(request, request.POST.get("sl"), price)
+                return remove_from_cart(request, request.POST.get("sl"), price)
+        else:
+            return add_to_cart(request, request.POST.get("sl"), price)
+
 
 class Search(ListView):
     template_name = 'magazine/search.html'

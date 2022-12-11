@@ -37,7 +37,7 @@ def admin_order_detail(request, order_id):
 def order_create(request):
     cart = request.session.get('cart')
 
-    prod = [(get_object_or_404(Product, slug=k), int(v['quantity'])) for k, v in cart.items() if k != 'subtotal' and k != 'count']
+    prod = [(get_object_or_404(Product, slug=k), int(v['quantity'])) for k, v in cart.items() if k != 'subtotal' and k != 'count' and k != 'discount']
 
     context = {
         'cart': cart,

@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 class Category(MPTTModel):
     title = models.CharField(max_length=255, verbose_name='Категория')
     slug = models.SlugField(max_length=255, verbose_name='Url', unique=True)
@@ -65,17 +66,3 @@ class Sale(models.Model):
         ordering = ('sale',)
         verbose_name = 'Скидка'
         verbose_name_plural = 'Скидки'
-
-
-class Cart(models.Model):
-    customer = models.ForeignKey(User, related_name='customer', on_delete=models.CASCADE, verbose_name='Покупатель')
-    product = models.ForeignKey(Product, on_delete=models.PROTECT, verbose_name='Товар', related_name='count_in_order', )
-    quantity = models.PositiveSmallIntegerField(verbose_name='Количество товара в заказе')
-
-    class Meta:
-        verbose_name = 'Корзина'
-        verbose_name_plural = 'Корзины'
-
-    def __str__(self):
-        return f'{self.customer}'
-

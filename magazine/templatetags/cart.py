@@ -1,5 +1,5 @@
 from django import template
-from magazine.models import Cart, Product
+from magazine.models import Product
 from django.shortcuts import get_object_or_404
 from coupons.forms import CouponApplyForm
 
@@ -27,11 +27,11 @@ def cart_area(session):
         context['cart'] = cart
         context['count'] = cart['count']
 
-        prod = [(get_object_or_404(Product, slug=k), int(v['quantity'])) for k, v in cart.items() if k != 'subtotal' and k != 'count']
+        prod = [(get_object_or_404(Product, slug=k), int(v['quantity'])) for k, v in cart.items() if k != 'subtotal' and k != 'count' and k != 'discount']
         context['prod'] = prod
 
         subtotal = cart['subtotal']
-        discount = 0
+        discount = cart['discount']
         if discount == None:
             total = subtotal
         else:
