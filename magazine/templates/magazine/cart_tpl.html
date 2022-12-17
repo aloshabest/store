@@ -34,17 +34,13 @@
                             {% csrf_token %}
                             <input type="hidden" name="types" value='remove' />
                             <input type="hidden" name="sl" value={{ p.slug }} />
+                            <input type="hidden" name="cpn" value='coupon' />
                             <span class="product-remove">
                                 <button type="submit" style="height:25px; width:25px; background-color: transparent; background-repeat: no-repeat; border: none;
                                 cursor: pointer; overflow: hidden; outline: none;">
                                     <i class="fa fa-close" aria-hidden="true" style="color:white;"></i>
                                 </button>
                             </span>
-
-                                <!--                            <span class="product-remove">-->
-<!--                                <i class="fa fa-close" aria-hidden="true"></i>-->
-<!--                            </span>-->
-
                         </form>
 
                         <span class="badge">Mango</span>
@@ -71,11 +67,12 @@
                 <li><span>total:</span> <span>${{ total }}</span></li>
             </ul>
             <div>
-                <form method="post">
+                <form method="post" name="myform2">
                     {% csrf_token %}
-                    {{ coupon_apply_form }}
+
                     <input type="hidden" name="types" value='add' />
                     <input type="hidden" name="coupon" value='coupon' />
+                    {{ coupon_apply_form }}
                     <input type="submit" value="Apply">
                 </form>
             </div>

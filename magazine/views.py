@@ -18,13 +18,14 @@ class Index(ListView):
         return context
 
     def post(self, request, *args, **kwargs):
-        price = get_object_or_404(Product, slug=request.POST.get("sl")).price
         if request.POST.get("types") != None:
             if request.POST.get("coupon") != None:
                 return add_coupon(request)
             else:
+                price = get_object_or_404(Product, slug=request.POST.get("sl")).price
                 return remove_from_cart(request, request.POST.get("sl"), price)
         else:
+            price = get_object_or_404(Product, slug=request.POST.get("sl")).price
             return add_to_cart(request, request.POST.get("sl"), price)
 
 
@@ -45,13 +46,15 @@ class Single(DetailView):
         return context
 
     def post(self, request, prod_slug, *args, **kwargs):
-        price = get_object_or_404(Product, slug=prod_slug).price
         if request.POST.get("types") != None:
             if request.POST.get("coupon") != None:
+
                 return add_coupon(request)
             else:
+                price = get_object_or_404(Product, slug=prod_slug).price
                 return remove_from_cart(request, request.POST.get("sl"), price)
         else:
+            price = get_object_or_404(Product, slug=prod_slug).price
             return add_to_cart(request, prod_slug, price)
 
 
@@ -97,13 +100,14 @@ class Shop(View):
         return render(request, template, context)
 
     def post(self, request, *args, **kwargs):
-        price = get_object_or_404(Product, slug=request.POST.get("sl")).price
         if request.POST.get("types") != None:
             if request.POST.get("coupon") != None:
                 return add_coupon(request)
             else:
+                price = get_object_or_404(Product, slug=request.POST.get("sl")).price
                 return remove_from_cart(request, request.POST.get("sl"), price)
         else:
+            price = get_object_or_404(Product, slug=request.POST.get("sl")).price
             return add_to_cart(request, request.POST.get("sl"), price)
 
 

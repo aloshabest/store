@@ -35,9 +35,6 @@ def remove_from_cart(request, prod_slug, price):
     if cart[prod_slug]['quantity'] == 0:
         del cart[prod_slug]
     request.session.modified = True
-    print()
-    print(request.META.get('HTTP_REFERER'))
-    print()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
@@ -45,9 +42,6 @@ def add_coupon(request):
     cart = request.session.get('cart')
     now = timezone.now()
     form = CouponApplyForm(request.POST)
-    print()
-    print(cart)
-    print()
     if form.is_valid():
         code = form.cleaned_data['code']
         try:
@@ -57,7 +51,4 @@ def add_coupon(request):
             cart['discount'] = None
 
     request.session.modified = True
-    print()
-    print(request.META.get('HTTP_REFERER'))
-    print()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
