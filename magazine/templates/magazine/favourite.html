@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<div class="breadcumb_area bg-img" style="background-image: url({% static 'img/bg-img/breadcumb.jpg' %});">
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-12">
+        <div class="page-title text-center">
+          <h2>Your favourite:</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="shop_grid_area section-padding-80">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-8 col-lg-9">
+        <div class="shop_grid_product_area">
+          <div class="row">
+            <div class="col-12">
+              <div class="product-topbar d-flex align-items-center justify-content-between">
+                <!-- Total Products -->
+                <div class="total-products">
+                  <p><span>{{ count }}</span> products</p>
+                </div>
+                <!-- Sorting -->
+                <div class="product-sorting d-flex">
+                  <p>Sort by:</p>
+                  <form action="#" method="get">
+                    <select name="select" id="sortByselect">
+                      <option value="value">Highest Rated</option>
+                      <option value="value">Newest</option>
+                      <option value="value">Price: $$ - $</option>
+                      <option value="value">Price: $ - $$</option>
+                    </select>
+                    <input type="submit" class="d-none" value="">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            {% for prod in page_obj %}
+            <!-- Single Product -->
+            <div class="col-12 col-sm-6 col-lg-4">
+              <div class="single-product-wrapper">
+                <!-- Product Image -->
+                <div class="product-img">
+                  <img src="{{ prod.image_first.url }}" alt="">
+                  <!-- Hover Thumb -->
+                  {% if prod.image_second %}
+                  <img class="{{ prod.image_second.url }}" alt="">
+                  {% endif %}
+                  <!-- Product Badge -->
+                  {% if prod in sale %}
+                  <div class="product-badge offer-badge">
+                    <span>-30%</span>
+                  </div>
+                  {% endif %}
+                  <!-- Favourite -->
+                  <div class="product-favourite">
+                    <a href="#" class="favme fa fa-heart"></a>
+                  </div>
+                </div>
+
+                <!-- Product Description -->
+                <div class="product-description">
+                  <span>topshop</span>
+                  <a href="{{ prod.get_absolute_url }}">
+                    <h6>{{ prod.title }}</h6>
+                  </a>
+
+                  {% if prod in sale %}
+                  <p class="product-price"><span class="old-price">$75.00</span> ${{ prod.price }}</p>
+                  {% else %}
+                  <p class="product-price">${{ prod.price }}</p>
+                  {% endif %}
+
+                  <!-- Hover Content -->
+                  <div class="hover-content">
+                    <!-- Add to Cart -->
+                    <div class="add-to-cart-btn">
+                      <a href="#" class="btn essence-btn">Add to Cart</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+
+
+          </div>
+        </div>
+        <!-- Pagination -->
+        {% include 'include/paginator.html' %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -129,3 +129,27 @@ class Search(ListView):
         context['sale_prod'] = Sale.objects.all()
         context['count'] = context['products'].count()
         return context
+
+
+class Favourite(View):
+    def get(self, request, *args, **kwargs):
+        template = 'magazine/favourite.html'
+
+        favourite = request.session.get('favourite')
+        products = Product.objects.filter(slug__in=favourite)
+
+        count = products.count()
+
+        paginator = Paginator(products, 9)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        sale, sale_prod = [i.prod for i in Sale.objects.all()], Sale.objects.all()
+
+        context = {
+            'sale': sale,
+            'count': count,
+            'page_obj': page_obj,
+            'sale_prod': sale_prod,
+        }
+        return render(request, template, context)
