@@ -91,9 +91,31 @@
                             <!-- Hover Thumb -->
                             <img class="hover-img" src="{{ p.image_second.url }}" alt="">
                             <!-- Favourite -->
+                            {% if p.slug in request.session.favourite %}
                             <div class="product-favourite">
-                                <a href="#" class="favme fa fa-heart"></a>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="favour" value='add'/>
+                                    <input type="hidden" name="sl" value={{ p.slug }} />
+                                    <button type="submit" style="background-color: transparent; background-repeat: no-repeat; border: none;
+                                    cursor: pointer; overflow: hidden; outline: none;">
+                                        <a class="favme fa fa-heart active" aria-hidden="true"></a>
+                                    </button>
+                                </form>
                             </div>
+                            {% else %}
+                            <div class="product-favourite">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="favour" value='add'/>
+                                    <input type="hidden" name="sl" value={{ p.slug }} />
+                                    <button type="submit" style="background-color: transparent; background-repeat: no-repeat; border: none;
+                                    cursor: pointer; overflow: hidden; outline: none;">
+                                        <a class="favme fa fa-heart" aria-hidden="true"></a>
+                                    </button>
+                                </form>
+                            </div>
+                            {% endif %}
                         </div>
                         <!-- Product Description -->
                         <div class="product-description">

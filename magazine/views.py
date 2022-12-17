@@ -4,6 +4,7 @@ from django.views import View
 from django.views.generic import ListView, DetailView, CreateView
 from django.core.paginator import Paginator
 from .cart import *
+from .favourite import *
 
 
 class Index(ListView):
@@ -19,11 +20,12 @@ class Index(ListView):
 
     def post(self, request, *args, **kwargs):
         if request.POST.get("types") != None:
-            if request.POST.get("coupon") != None:
-                return add_coupon(request)
-            else:
-                price = get_object_or_404(Product, slug=request.POST.get("sl")).price
-                return remove_from_cart(request, request.POST.get("sl"), price)
+            price = get_object_or_404(Product, slug=request.POST.get("sl")).price
+            return remove_from_cart(request, request.POST.get("sl"), price)
+        elif request.POST.get("coupon") != None:
+            return add_coupon(request)
+        elif request.POST.get("favour") != None:
+            return add_or_remove_favourite(request, request.POST.get("sl"))
         else:
             price = get_object_or_404(Product, slug=request.POST.get("sl")).price
             return add_to_cart(request, request.POST.get("sl"), price)
@@ -47,14 +49,14 @@ class Single(DetailView):
 
     def post(self, request, prod_slug, *args, **kwargs):
         if request.POST.get("types") != None:
-            if request.POST.get("coupon") != None:
-
-                return add_coupon(request)
-            else:
-                price = get_object_or_404(Product, slug=prod_slug).price
-                return remove_from_cart(request, request.POST.get("sl"), price)
+            price = get_object_or_404(Product, slug=request.POST.get("sl")).price
+            return remove_from_cart(request, request.POST.get("sl"), price)
+        elif request.POST.get("coupon") != None:
+            return add_coupon(request)
+        elif request.POST.get("favour") != None:
+            return add_or_remove_favourite(request, prod_slug)
         else:
-            price = get_object_or_404(Product, slug=prod_slug).price
+            price = get_object_or_404(Product, slug=request.POST.get("sl")).price
             return add_to_cart(request, prod_slug, price)
 
 
@@ -101,11 +103,12 @@ class Shop(View):
 
     def post(self, request, *args, **kwargs):
         if request.POST.get("types") != None:
-            if request.POST.get("coupon") != None:
-                return add_coupon(request)
-            else:
-                price = get_object_or_404(Product, slug=request.POST.get("sl")).price
-                return remove_from_cart(request, request.POST.get("sl"), price)
+            price = get_object_or_404(Product, slug=request.POST.get("sl")).price
+            return remove_from_cart(request, request.POST.get("sl"), price)
+        elif request.POST.get("coupon") != None:
+            return add_coupon(request)
+        elif request.POST.get("favour") != None:
+            return add_or_remove_favourite(request, request.POST.get("sl"))
         else:
             price = get_object_or_404(Product, slug=request.POST.get("sl")).price
             return add_to_cart(request, request.POST.get("sl"), price)

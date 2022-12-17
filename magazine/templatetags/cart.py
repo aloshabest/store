@@ -30,7 +30,7 @@ def cart_area(session):
         prod = [(get_object_or_404(Product, slug=k), int(v['quantity'])) for k, v in cart.items() if k != 'subtotal' and k != 'count' and k != 'discount']
         context['prod'] = prod
 
-        subtotal = cart['subtotal']
+        subtotal = float("{:.2f}".format(cart['subtotal']))
         discount = cart['discount']
         if discount == None:
             total = subtotal

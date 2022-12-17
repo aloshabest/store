@@ -43,8 +43,8 @@ def order_create(request):
         'cart': cart,
         'prod': prod,
     }
-    subtotal = cart['subtotal']
-    discount = float(15)
+    subtotal = float("{:.2f}".format(cart['subtotal']))
+    discount = cart['discount']
     total = float("{:.2f}".format(subtotal - subtotal * (discount / 100)))
 
     context['subtotal'] = subtotal

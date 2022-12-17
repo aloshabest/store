@@ -162,9 +162,31 @@
                   </div>
                   {% endif %}
                   <!-- Favourite -->
+                  {% if prod.slug in request.session.favourite %}
                   <div class="product-favourite">
-                    <a href="#" class="favme fa fa-heart"></a>
+                    <form method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="favour" value='add'/>
+                      <input type="hidden" name="sl" value={{ prod.slug }} />
+                      <button type="submit" style="background-color: transparent; background-repeat: no-repeat; border: none;
+                                    cursor: pointer; overflow: hidden; outline: none;">
+                        <a class="favme fa fa-heart active" aria-hidden="true"></a>
+                      </button>
+                    </form>
                   </div>
+                  {% else %}
+                  <div class="product-favourite">
+                    <form method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="favour" value='add'/>
+                      <input type="hidden" name="sl" value={{ prod.slug }} />
+                      <button type="submit" style="background-color: transparent; background-repeat: no-repeat; border: none;
+                                    cursor: pointer; overflow: hidden; outline: none;">
+                        <a class="favme fa fa-heart" aria-hidden="true"></a>
+                      </button>
+                    </form>
+                  </div>
+                  {% endif %}
                 </div>
 
                 <!-- Product Description -->
@@ -181,7 +203,7 @@
                   {% endif %}
 
                   <!-- Hover Content -->
-                  <div class="hover-content">
+                  <div class="hover-content" style="margin-top:-20px">
                     <!-- Add to Cart -->
                     <form method="post">
                       {% csrf_token %}

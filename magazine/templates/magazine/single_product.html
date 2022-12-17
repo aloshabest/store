@@ -54,11 +54,30 @@
                     {% csrf_token %}
                     <button type="submit" name="addtocart" value="5" class="btn essence-btn">Add to cart</button>
                 </form>
-<!--                <button type="submit" name="addtocart" value="5" class="btn essence-btn">Add to cart</button>-->
-                <!-- Favourite -->
+
+                {% if product.slug in request.session.favourite %}
                 <div class="product-favourite ml-4">
-                    <a href="#" class="favme fa fa-heart"></a>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="favour" value='add'/>
+                        <button type="submit" style="height:25px; width:25px; background-color: transparent; background-repeat: no-repeat; border: none;
+                        cursor: pointer; overflow: hidden; outline: none;">
+                            <i class="favme fa fa-heart active" aria-hidden="true"></i>
+                        </button>
+                    </form>
                 </div>
+                {% else %}
+                <div class="product-favourite ml-4">
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="favour" value='add'/>
+                        <button type="submit" style="height:25px; width:25px; background-color: transparent; background-repeat: no-repeat; border: none;
+                        cursor: pointer; overflow: hidden; outline: none;">
+                            <i class="favme fa fa-heart" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                </div>
+                {% endif %}
             </div>
         </form>
     </div>

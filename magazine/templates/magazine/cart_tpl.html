@@ -34,7 +34,6 @@
                             {% csrf_token %}
                             <input type="hidden" name="types" value='remove' />
                             <input type="hidden" name="sl" value={{ p.slug }} />
-                            <input type="hidden" name="cpn" value='coupon' />
                             <span class="product-remove">
                                 <button type="submit" style="height:25px; width:25px; background-color: transparent; background-repeat: no-repeat; border: none;
                                 cursor: pointer; overflow: hidden; outline: none;">
@@ -69,8 +68,6 @@
             <div>
                 <form method="post" name="myform2">
                     {% csrf_token %}
-
-                    <input type="hidden" name="types" value='add' />
                     <input type="hidden" name="coupon" value='coupon' />
                     {{ coupon_apply_form }}
                     <input type="submit" value="Apply">
